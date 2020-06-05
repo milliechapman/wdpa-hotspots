@@ -1,0 +1,591 @@
+Identification_Information:
+  Citation:
+    Citation_Information:
+      Originator: Conservation Synthesis, Center for Applied Biodiversity Science at Conservation International
+      Publication_Date: 2004
+      Title: Hotspots Revisited 2004 Polygons
+      Edition: December, 2004
+      Geospatial_Data_Presentation_Form: vector digital data
+      Other_Citation_Details: Mittermeier, R. A., Robles-Gil, P., Hoffmann, M., Pilgrim, J. D., Brooks, T. B., Mittermeier, C. G., Lamoreux, J. L. & Fonseca, G. A. B. 2004. Hotspots Revisited: Earth’s Biologically Richest and Most Endangered Ecoregions. CEMEX, Mexico City, Mexico 390pp.
+      Online_Linkage: http://www.biodiversityhotspots.org/xp/Hotspots/resources/maps.xml
+  Description:
+    Abstract: The biodiversity hotspots are regions known to hold especially high numbers of species found nowhere else, yet their remaining habitat combined covers a little more than two percent of Earth's land surface. According to the criteria developed by Myers et al. (2000), a hotspot must meet two thresholds in order to qualify: 1) it must have at least 1500 endemic, native vascular plant species, and 2) it must have already lost at least 70% of its primary, native vegetation. In the updated analysis, Mittermeier et al. (2004) recognize 34 hotspots which together hold 50% of the world's plant species and 42% of all terrestrial vertebrates as endemics. As evidence of their urgency for global conservation, hotspots also hold exceptionally high numbers of threatened vertebrates, including 50% of threatened mammals, 73% of threatened birds and 79% of threatened amphibians as endemics. There are an estimated two billion people living in the hotspots, with 300 million people within less than 10 km of existing protected areas.
+    Purpose: To show the location and extent of the 34 biodiversity hotspots (highly threatened biogeographic regions with high-biodiversity endemism), as defined by Mittermeier et al. (2004).
+    Supplemental_Information: The ecoregional classification of the World Wildlife Fund-U.S. is the most widely-used bioregional classification system for global scale bioregionalization (Wikramanayake et al. 2002). In order to facilitate analysis, interoperability, and collaboration, we have gone to considerable lengths to ensure that the boundaries of hotspots correspond directly to those of the World Wildlife Fund-U.S. ecoregions (Olson et al. 2001). Thus, our calculations of hotspot extents are based on ecoregional data. In total, the hotspots incorporate 374 ecoregions, 43% of the total. The only significant exceptions to the match between hotspots and ecoregions are in three cases where recent maps update ecoregional boundaries: the Albertine Rift (Plumptre et al. 2003); Maputaland-Pondoland-Albany (van Wyk & Smith 2001); and the Caucasus (Krever et al. 2001).
+  Time_Period_of_Content:
+    Time_Period_Information:
+      Single_Date/Time:
+        Calendar_Date: 2004
+    Currentness_Reference: vector digital data
+  Status:
+    Progress: Complete
+    Maintenance_and_Update_Frequency: As needed
+  Spatial_Domain:
+    Bounding_Coordinates:
+      West_Bounding_Coordinate: -180.000000
+      East_Bounding_Coordinate: 180.000000
+      North_Bounding_Coordinate: 47.262476
+      South_Bounding_Coordinate: -57.210330
+  Keywords:
+    Theme:
+      Theme_Keyword_Thesaurus: Priority Life Variance Areas
+      Theme_Keyword: Biodiversity Hotspots
+    Place:
+      Place_Keyword: Global
+    Temporal:
+      Temporal_Keyword: 2004
+  Access_Constraints: NONE
+  Use_Constraints:
+    Terms of Use:
+
+    Acceptance of Terms.
+    By using this shapefile(s) ("CI Shapefile"), you (the "User") agree to be bound by these Terms of Use.  If you do not agree to be bound by these terms and conditions, please do not use this CI Shapefile.
+
+    Conservation International Foundation ("CI") reserves the right at any time and from time to time to modify or discontinue, temporarily or permanently, any or all of this CI Shapefile (or any part thereof).  CI shall not be liable to any User or other third party for any such modification, suspension or discontinuance. 
+
+    © 2005 Conservation International Foundation 
+    
+    Ownership and Distribution. 
+    Ownership and Distribution of Conservation International Foundation's (CI) Materials. The materials and content on the CI Shapefile are the property of CI, and are protected under copyright, trademark and other intellectual property laws.  These materials and content include, but are not limited to, shapefiles, metadata, maps and map data, pictures, images, graphics, video, geocodes and/or geocoded data and/or data, logos, trademarks, and text.  
+
+    Use, reproduction and modification of the CI Shapefile for any non-profit, training, research, 
+    or educational purpose whatsoever are subject to the following conditions, criteria and limitations: 
+
+    1. The metadata file, and in particular, this Terms of Use statement, forms an integral part of the CI Shapefile, and must be distributed and stored with the CI Shapefile.
+
+    2. Any use of the CI Shapefile in analysis, on any report about the analysis or findings, or in display whatsoever, must be clearly and prominently credited to Conservation International Foundation. 
+
+    This data source credit shall not state or imply that Conservation International Foundation is a party to or endorses any analysis, or any report about an analysis or finding unless there is a written agreement between the parties involved. Please see Output Limitations below, for an appropriate data credit wording.
+
+    3. The CI Shapefile may not be modified or altered in any manner. Modification of the CI Shapefile includes modification (editing) of the graphic shapes and / or alteration of any tabular attribute data (either in regard to individual records or to tabular item type definitions) associated with a graphic shape. Transformation of the spatial coordinate system of the data set (reprojection) shall not be construed as disallowed modification, but the shapefile thus reprojected must not be distributed without express written consent of Conservation International Foundation.
+
+    4. The CI Shapefile may not be used or offered for any direct or indirect commercial purpose or advantage, or for sale, rent, lease, or sublicense, in any state, format, or form, either in whole or in part, alone or bundled with other data or data sets, without express written consent of Conservation International Foundation.
+
+    Output Limitations.  
+    Any map or graphics file that is generated from this data set will be referred to in this section as a "Reproduction". A User may create and reproduce an unlimited number of Reproductions for the User's own personal, in-house study, or intra-institutional use subject to the property rights notice and credit requirements set forth below. Conservation International Foundation requires that the copyright credit notice appear in legible form on or adjacent to the reproduction in the following form:  
+    "Hotspots Revisited", Conservation International 2004
+    
+    User may distribute Reproductions on paper, as long as the Reproductions are distributed freely, without charge and the Conservation International Foundation copyright notice appears in legible form or Conservation International Foundation is given legible credit as described above. This credit notice, and the use of this data set, shall not state or imply any connection between CI and any other person or organization, or any association with, or endorsement by, CI of any position implied or forwarded by any Reproduction (as defined in this section).
+    
+    A supplementary license is required to be obtained from Conservation International Foundation before User can reproduce and distribute any Reproductions over the Internet or other electronic networks, or in a publication that is for sale, resale, or that contains paid advertisement. These publications shall include, but not be limited to: periodicals (both learned journals and commercial and trade publications), books (including textbooks, atlases, and other books), posters, pamphlets, and other printed materials, and electronic publications (including e-books, web sites, and electronically distributed documents). In most cases this license is available free of charge. Please contact Conservation International Foundation for more details of publication use licenses: hotspots@conservation.org or Coordinator, Conservation Synthesis, Conservation International, 1919 M Street NW, Suite 600, Washington, DC, USA 20036.
+
+    Copyright. 
+    Any copyright notice contained in this Terms of Use or on any other part of this CI Shapefile shall remain intact and unaltered and shall be affixed to any use or copy of any CI Shapefile.  User must include an appropriate citation crediting CI as indicated above.
+
+    The name CONSERVATION INTERNATIONAL and the CONSERVATION INTERNATIONAL logo are registered trademarks and service marks.  No use of these trademarks or service marks is permitted, especially use in any advertising or endorsement or any products or commercial entity, unless specific written permission is obtained from Conservation International.
+    
+    Disclaimer. 
+    The CI Shapefile metadata contains references to and citations of data sets generated, and work carried out, by third parties not associated with CI. Referenced data sets are versions current at the time of CI's 2004 Hotspot Revisited Analysis. Alterations to these referenced data sets by the third parties involved, subsequent to CI's analysis, has no effect upon any area delineated in this shapefile.
+    
+    CI DOES NOT WARRANT OR GUARANTY THAT ANY DATA, SHAPEFILE, FILE, OR OTHER INFORMATION GENERATED BY USE OF THE CI MATERIALS OR DATA WILL BE ERROR-FREE.  THE CONTENT, SHAPEFILES, FILES, DATA, METADATA MATERIALS AND CI MATERIALS ARE PROVIDED "AS IS" AND CI MAKES NO REPRESENTATIONS OR EXPRESS OR IMPLIED WARRANTIES OF ANY KIND, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED WARRANTIES OF NONINFRINGEMENT, MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. 
+
+    Neither CI, its affiliates, its related entities, its employees, agents nor its content providers shall be responsible or liable to any person, firm, or corporation for any loss, damage, injury, claim, or liability of any kind or character whatsoever (including direct, indirect, punitive or consequential damages) related to any claim, including but not limited to, claims associated with the loss of data or profits, that are based on or resulting from or arise out of or in connection with the access, use, content, performance of or reliance on this website, any linked website, or any links contained in any linked website. 
+
+    Linked Sites Disclaimer. 
+    This CI website and CI Shapefile and its shapefile metadata contain links and references to other Websites that do not belong to CI. Any third-party site is outside the domain and not under the control of CI, and may have a range of terms and conditions.  CI is providing the link only as a convenience.  User accesses any third-party site at User's own risk, including reliance on the content contained on or provided by such links or sites.  CI is not responsible for the content or use of any third-party site or any linked site contained within the third-party site.  No sponsorship, approval, or endorsement or any product, service or information provided by the third-party site is intended or implied by CI.  
+
+    Governing Law. 
+    User agrees that the laws of the United States and the District of Columbia, without regard to principles of conflict of laws, will govern these Terms of Use and any dispute that might arise between the User and CI or its affiliates. By visiting and using this Site, User agrees to abide by all laws of the United States of America, including any applicable export control laws regarding the use of any or all parts of this website. If any term or provision of this Agreement is for any reason held to be invalid, such invalidity shall not affect any other term or provision, and this Agreement shall be interpreted as if such term or provision had never been contained in this Agreement. This Agreement contains the entire understanding of CI and user with respect to its subject matter.
+
+    Any rights not expressly granted herein are reserved.
+  Point_of_Contact:
+    Contact_Information:
+      Contact_Organization_Primary:
+        Contact_Organization: Conservation International
+      Contact_Position: Coordinator, Conservation Synthesis
+      Contact_Address:
+        Address_Type: mailing and physical address
+        Address: 1919 M Street ,NW, Suite 600
+        City: Washington
+        State_or_Province: District of Columbia
+        Postal_Code: 20036
+        Country: USA
+      Contact_Voice_Telephone: +1 202 912 1000
+      Contact_Facsimile_Telephone: +1 202 912 0773
+      Contact_Electronic_Mail_Address: hotspots@conservation.org
+  Data_Set_Credit: Conservation Synthesis, Center for Applied Biodiversity Science at Conservation International
+  Security_Information:
+    Security_Classification: Unclassified
+  Native_Data_Set_Environment: Microsoft Windows 2000 Version 5.0 (Build 2195) Service Pack 4; ESRI ArcCatalog 9.0.0.535
+Data_Quality_Information:
+  Lineage:
+    Source_Information:
+      Source_Citation:
+        Citation_Information:
+          Originator: World Wildlife Fund
+          Publication_Date: 2001
+          Title: Terrestrial ecoregions of the world: A new map of life on Earth
+          Geospatial_Data_Presentation_Form: vector digital data
+          Other_Citation_Details: Full citation: Olson, D.M., E. Dinerstein, E.D. Wikramanayake, N.D. Burgess, G.V.N. Powell, E.C. Underwood, J.A. D’Amico, H.E. Strand, J.C. Morrison, C.J. Loucks, T.F. Allnutt, J.F. Lamoreux, T.H. Ricketts, I. Itoua, W.W. Wettengel, Y. Kura, P. Hedao, and K. Kassem. 2001. Terrestrial ecoregions of the world: A new map of life on Earth. BioScience 51(11):933-938.
+      Source_Scale_Denominator: 1000000
+      Type_of_Source_Media: online
+      Source_Time_Period_of_Content:
+        Time_Period_Information:
+          Single_Date/Time:
+            Calendar_Date: 2001
+        Source_Currentness_Reference: publication date
+      Source_Citation_Abbreviation: WWF Ecoregions
+      Source_Contribution: The ecoregional classification of the World Wildlife Fund-U.S. is the most widely-used bioregional classification system for global scale bioregionalization (Wikramanayake et al. 2002). In order to facilitate analysis, interoperability, and collaboration, we have gone to considerable lengths to ensure that the boundaries of hotspots high-biodiversity correspond directly to those of the World Wildlife Fund-U.S. ecoregions (Olson et al. 2001). Thus, our calculations of hotspot extents are based on ecoregional data. In total, the hotspots incorporate 374 ecoregions, 43% of the total. The only significant exceptions to the match between hotspots and ecoregions are in three cases where recent maps update ecoregional boundaries: the Albertine Rift (Plumptre et al. 2003); Maputaland-Pondoland-Albany (van Wyk & Smith 2001); and the Caucasus (Krever et al. 2001).
+    Source_Information:
+      Source_Citation:
+        Citation_Information:
+          Originator: National Imagery and Mapping Agency
+          Publication_Date: 2000
+          Title: VMAP0 - Vector Map Level 0 (Digital Chart of the World)
+          Edition: 5
+          Geospatial_Data_Presentation_Form: vector digital data
+          Publication_Information:
+            Publication_Place: St. Louis, MO
+            Publisher: National Imagery and Mapping Agency
+      Source_Scale_Denominator: 1000000
+      Type_of_Source_Media: online
+      Source_Time_Period_of_Content:
+        Time_Period_Information:
+          Single_Date/Time:
+            Calendar_Date: 2000
+        Source_Currentness_Reference: publication date
+      Source_Citation_Abbreviation: VMAP0
+      Source_Contribution: VMAP0 was used to create a common coastline for all of the hotspots.
+    Source_Information:
+      Source_Citation:
+        Citation_Information:
+          Originator: van Wyk, A.E. & Smith, G.F.
+          Publication_Date: 2001
+          Title: Regions of Floristic Endemism in Southern Africa
+          Geospatial_Data_Presentation_Form: vector digital data
+          Publication_Information:
+            Publication_Place: Hatfield, South Africa
+            Publisher: Umdaus Press
+          Other_Citation_Details: Full citation: van Wyk, A.E. & Smith, G.F. (2001) Regions of Floristic Endemism in Southern Africa. Umdaus Press, Hatfield, South Africa.
+      Source_Scale_Denominator: unknown
+      Type_of_Source_Media: disc
+      Source_Citation_Abbreviation: van Wyk, A.E. & Smith, G.F.
+      Source_Contribution: The shapefile used to create the corresponding map in this publication was used to define the Maputaland-Pondoland-Albany hotspot.
+    Source_Information:
+      Source_Citation:
+        Citation_Information:
+          Originator: Wildlife Conservation Society
+          Publication_Date: 2003
+          Title: The Biodiversity of the Albertine Rift. Albertine Rift Technical Reports Series No. 3
+          Publication_Information:
+            Publication_Place: Kampala, Uganda
+            Publisher: Wildlife Conservation Society
+          Other_Citation_Details: Full citation: Plumptre, A.J., Behangana, M., Davenport, T.R.B., Kahindo, C., Kityo, R., Ndomba, E., Nkuutu, D., Owinunji, I., Ssegawa, P. & Eilu, G. (2003) The Biodiversity of the Albertine Rift. Albertine Rift Technical Reports Series No. 3. Wildlife Conservation Society. Kampala, Uganda.
+      Source_Scale_Denominator: unknown
+      Type_of_Source_Media: disc
+      Source_Citation_Abbreviation: Plumptre, A.J. et al.
+      Source_Contribution: The shapefile used to create the corresponding map in this publication was used to define the Albertine Rift hotspot.
+    Source_Information:
+      Source_Citation:
+        Citation_Information:
+          Originator: World Wide Fund for Nature
+          Publication_Date: 2001
+          Title: Biodiversity of the Caucasus Ecoregion
+          Publication_Information:
+            Publication_Place: Moscow, Russia
+            Publisher: World Wide Fund for Nature
+          Other_Citation_Details: Full citation: Krever, V., Zazanashvili, N. Jungius, H., Williams, L. & Petelin, D. (2001). Biodiversity of the Caucasus Ecoregion. World Wide Fund for Nature. Moscow, Russia.
+      Source_Scale_Denominator: unknown
+      Type_of_Source_Media: disc
+      Source_Time_Period_of_Content:
+        Time_Period_Information:
+          Single_Date/Time:
+            Calendar_Date: 2001
+        Source_Currentness_Reference: publication date
+      Source_Citation_Abbreviation: Krever, V. et al .
+      Source_Contribution: The shapefile used to create the corresponding map in this publication was used to define the northern boundaries of the Caucasus hotspot.
+    Process_Step:
+      Process_Description: Atlantic Forest: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [12]: NT0101 Araucaria moist forests; NT0102 Atlantic Coast restingas; NT0103 Bahia coastal forests; NT0104 Bahia interior forests; NT0106 Caatinga Enclaves moist forests; NT0150 Alto Paraná Atlantic forests; NT0151 Pernambuco coastal forests; NT0152 Pernambuco interior forests; NT0160 Serra do Mar coastal forests; NT0703 Campos Rupestres montane savanna; NT1406 Southern Atlantic mangroves; NT0123 Fernando de Noronha-Atol das Rocas moist forests.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: California Floristic Province: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [7]: NA0516 Klamath-Siskiyou forests; NA0519 Northern California coastal forests; NA0527 Sierra Nevada forests; NA0801 California Central Valley grasslands; NA1201 California coastal sage and chaparral; NA1202 California interior chaparral and woodlands; NA1203 California montane chaparral and woodlands. Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Cape Floristic Region: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [2]: AT1202 Lowland fynbos and renosterveld; AT1203 Montane fynbos and renosterveld.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Caribbean Islands: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [25]: NT0120 Cuban moist forests; NT0127 Hispaniolan moist forests; NT0131 Jamaican moist forests; NT0134 Leeward Islands moist forests; NT0155 Puerto Rican moist forests; NT0179 Windward Islands moist forests; NT0203 Bahamian dry forests; NT0208 Cayman Islands dry forests; NT0213 Cuban dry forests; NT0215 Hispaniolan dry forests; NT0218 Jamaican dry forests; NT0220 Lesser Antillean dry forests; NT0226 Puerto Rican dry forests; NT0234 Windward Islands dry forests; NT0301 Bahamian pine mosaic; NT0304 Cuban pine forests; NT0305 Hispaniolan pine forests; NT0902 Cuban wetlands; NT0903 Enriquillo wetlands; NT1302 Aruba-Curaçao-Bonaire cactus scrub; NT1305 Caribbean shrublands; NT1306 Cuban cactus scrub; NT1310 Leeward Islands xeric scrub; NT1317 Windward Islands xeric scrub; NT1402 Bahamoan-Antillean mangroves.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Caucasus: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [4]: PA0407 Caspian Hyrcanian mixed forests; PA0408 Caucasus mixed forests; PA0416 Crimean Submediterranean forest complex; PA1305 Azerbaijan shrub desert and steppe; PA0814 Pontic Steppe.  The northern boundary of ecoregion PA0814 was modified to conform with the boundaries of Krever et al.(2001). Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: Krever, V. et al.
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Cerrado: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [2]: NT0202 Atlantic dry forests; NT0704 Cerrado.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Chilean Winter Rainfall and Valdivian Forests: Based on the limits of the following WWF ecoregion boundaries: Ecoregions [4]: NT0401 Juan Fernández Islands temperate forests; NT0403 San Félix-San Ambrosio Islands temperate forests; NT0404 Valdivian temperate forests; NT1201 Chilean matorral.   Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Coastal Forests of Eastern Africa: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [4]: AT0125 Northern Zanzibar-Inhambane coastal forest mosaic; AT0128 Southern Zanzibar-Inhambane coastal forest mosaic; AT0906 Zambezian coastal flooded savanna; AT1402 East African mangroves. Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: East Melanesian Islands: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [5]: AA0101 Admiralty Islands lowland rain forests; AA0111 New Britain-New Ireland lowland rain forests; AA0112 New Britain-New Ireland montane rain forests; AA0119 Solomon Islands rain forests; AA0126 Vanuatu rain forests.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Eastern Afromontane: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [11]: AT1321 Southwestern Arabian montane woodlands; AT1006 Eastern Zimbabwe montane forest-grassland mosaic; AT0109 Eastern Arc forests; AT1015 Southern Rift montane forest-grassland mosaic; AT0108 East African montane forests; AT1005 East African montane moorlands; AT0112 Ethiopian montane forests; AT1007 Ethiopian montane grasslands and woodlands; AT1008 Ethiopian montane moorlands. The Albertine Rift component is based on the definition contained in Plumptre et al. (2003).  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: Plumptre, A.J. et al.
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Guinean Forests of West Africa: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [10]: AT0103 Cameroonian Highlands forests; AT0106 Cross-Niger transition forests; AT0107 Cross-Sanaga-Bioko coastal forests; AT0111 Eastern Guinean forests; AT0114 Guinean montane forests; AT0121 Mount Cameroon and Bioko montane forests; AT0122 Niger Delta swamp forests; AT0123 Nigerian lowland forests; AT0127 Sao Tome, Principe and Annobon moist lowland forests; AT0130 Western Guinean lowland forests.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Himalaya: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [13]: IM0105 Brahmaputra Valley semi-evergreen forests; IM0115 Himalayan subtropical broadleaf forests; IM0301 Himalayan subtropical pine forests; IM0401 Eastern Himalayan broadleaf forests; IM0402 Northern Triangle temperate forests; IM0403 Western Himalayan broadleaf forests; IM0501 Eastern Himalayan subalpine conifer forests; IM0502 Western Himalayan subalpine conifer forests; IM0701 Terai-Duar savanna and grasslands; PA0514 Northeastern Himalayan subalpine conifer forests; PA1003 Eastern Himalayan alpine shrub and meadows; PA1012 Northwestern Himalayan alpine shrub and meadows; PA1021 Western Himalayan alpine shrub and meadows.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Horn of Africa: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [8]: AT0715 Somali Acacia-Commiphora bushlands and thickets; AT1302 Arabian Peninsula coastal fog desert; AT1304 Eritrean coastal desert; AT1305 Ethiopian xeric grasslands and shrublands; AT1307 Hobyo grasslands and shrublands; AT1318 Socotra Island xeric shrublands; AT1319 Somali montane xeric woodlands; AT1320 Southwestern Arabian foothills savanna.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Indo-Burma: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [32]: IM0101 Andaman Islands rain forests; IM0106 Cardamom Mountains rain forests; IM0107 Chao Phraya freshwater swamp forests; IM0108 Chao Phraya lowland moist deciduous forests; IM0109 Chin Hills-Arakan Yoma montane forests; IM0116 Irrawaddy freshwater swamp forests; IM0117 Irrawaddy moist deciduous forests; IM0119 Kayah-Karen montane rain forests; IM0121 Luang Prabang montane rain forests; IM0126 Meghalaya subtropical forests; IM0131 Mizoram-Manipur-Kachin rain forests; IM0132 Myanmar coastal rain forests; IM0136 Northern Annamites rain forests; IM0137 Northern Indochina subtropical forests; IM0138 Northern Khorat Plateau moist deciduous forests; IM0139 Northern Thailand-Laos moist deciduous forests; IM0140 Northern Triangle subtropical forests; IM0141 Northern Vietnam lowland rain forests; IM0147 Red River freshwater swamp forests; IM0149 South China-Vietnam subtropical evergreen forests; IM0152 Southern Annamites montane rain forests; IM0163 Tenasserim-South Thailand semi-evergreen rain forests; IM0164 Tonle Sap freshwater swamp forests; IM0165 Tonle Sap-Mekong peat swamp forests; IM0169 Hainan Island monsoon rain forests; IM0202 Central Indochina dry forests; IM0205 Irrawaddy dry forests; IM0210 Southeastern Indochina dry evergreen forests; IM0211 Southern Vietnam lowland dry forests; IM0303 Northeast India-Myanmar pine forests; IM1402 Indochina mangroves; IM1404 Myanmar Coast mangroves.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Irano-Anatolian: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [7]: PA0410 Central Anatolian deciduous forests; PA0420 Eastern Anatolian deciduous forests; PA0446 Zagros Mountains forest steppe; PA0507 Elburz Range forest steppe; PA0803 Central Anatolian steppe; PA0805 Eastern Anatolian montane steppe; PA1008 Kopet Dag woodlands and forest steppe.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Japan: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [9]: IM0170 Nansei Islands subtropical evergreen forests; OC0109 Ogasawara subtropical moist forests; PA0423 Hokkaido deciduous forests; PA0427 Nihonkai evergreen forests; PA0428 Nihonkai montane deciduous forests; PA0440 Taiheiyo evergreen forests; PA0441 Taiheiyo montane deciduous forests; PA0510 Hokkaido montane conifer forests; PA0511 Honshu alpine conifer forests.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Madagascar and the Indian Ocean Islands: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [11]: AT0105 Comoros forests; AT0113 Granitic Seychelles forests; AT0117 Madagascar lowland forests; AT0118 Madagascar subhumid forests; AT0120 Mascarene forests; AT0202 Madagascar dry deciduous forests; AT1011 Madagascar ericoid thickets; AT1301 Aldabra Island xeric scrub; AT1311 Madagascar spiny thickets; AT1312 Madagascar succulent woodlands; AT1404 Madagascar mangroves.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Madrean Pine-Oak Woodlands: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [7]: NA0302 Sierra Madre Occidental pine-oak forests; NA0303 Sierra Madre Oriental pine-oak forests; NA0526 Sierra Juarez and San Pedro Martir pine-oak forests; NT0307 Sierra de la Laguna pine-oak forests; NT0308 Sierra Madre de Oaxaca pine-oak forests; NT0309 Sierra Madre del Sur pine-oak forests; NT0310 Trans-Mexican Volcanic Belt pine-oak forests.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Maputaland-Pondoland-Albany: Based on the definition contained in van Wyk & Smith (2001).  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: van Wyk. A.E. & Smith, G.F.
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Mediterranean Basin: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [27]: AT0201 Cape Verde Islands dry forests; PA0403 Azores temperate mixed forests; PA0425 Madeira evergreen forests; PA0513 Mediterranean conifer and mixed forests; PA1010 Mediterranean High Atlas juniper steppe; PA1201 Aegean and Western Turkey sclerophyllous and mixed forests; PA1202 Anatolian conifer and deciduous mixed forests; PA1203 Canary Islands dry woodlands and forests; PA1204 Corsican montane broadleaf and mixed forests; PA1205 Crete Mediterranean forests; PA1206 Cyprus Mediterranean forests; PA1207 Eastern Mediterranean conifer-sclerophyllous-broadleaf forests; PA1208 Iberian conifer forests; PA1209 Iberian sclerophyllous and semi-deciduous forests; PA1210 Illyrian deciduous forests; PA1211 Italian sclerophyllous and semi-deciduous forests; PA1212 Mediterranean acacia-argania dry woodlands and succulent thickets; PA1213 Mediterranean dry woodlands and steppe; PA1214 Mediterranean woodlands and forests; PA1215 Northeastern Spain and Southern France Mediterranean forests; PA1216 Northwest Iberian montane forests; PA1217 Pindus Mountains mixed forests; PA1218 South Appenine mixed montane forests; PA1219 Southeastern Iberian shrubs and woodlands; PA1220 Southern Anatolian montane conifer and deciduous forests; PA1221 Southwest Iberian Mediterranean sclerophyllous and mixed forests; PA1222 Tyrrhenian-Adriatic sclerophyllous and mixed forests.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Mesoamerica: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [36]: NT0705 Clipperton Island shrub and grasslands; NT0110 Cayos Miskitos-San Andrés and Providencia moist forests; NT0111 Central American Atlantic moist forests; NT0112 Central American montane forests; NT0113 Chiapas montane forests; NT0114 Chimalapas montane forests; NT0116 Cocos Island moist forests; NT0119 Costa Rican seasonal moist forests; NT0129 Isthmian-Atlantic moist forests; NT0130 Isthmian-Pacific moist forests; NT0146 Oaxacan montane forests; NT0148 Pantanos de Centla; NT0154 Petén-Veracruz moist forests; NT0161 Sierra de los Tuxtlas; NT0162 Sierra Madre de Chiapas moist forest; NT0167 Talamancan montane forests; NT0176 Veracruz moist forests; NT0177 Veracruz montane forests; NT0181 Yucatán moist forests; NT0204 Bajío dry forests; NT0205 Balsas dry forests; NT0209 Central American dry forests; NT0216 Islas Revillagigedo dry forests; NT0217 Jalisco dry forests; NT0224 Panamanian dry forests; NT0228 Sinaloan dry forests; NT0230 Southern Pacific dry forests; NT0233 Veracruz dry forests; NT0235 Yucatán dry forests; NT0302 Belizean pine forests; NT0303 Central American pine-oak forests; NT0306 Miskito pine forests; NT0901 Central Mexican wetlands; NT1312 Motagua Valley thornscrub; NT1403 Mesoamerican Gulf-Caribbean mangroves; NT1407 Southern Mesoamerican Pacific mangroves.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Mountains of Central Asia: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [6]: PA0521 Tian Shan montane conifer forests; PA0801 Alai-Western Tian Shan steppe; PA0808 Gissaro-Alai open woodlands; PA0818 Tian Shan foothill arid steppe; PA1014 Pamir alpine desert and tundra; PA1019 Tian Shan montane steppe and meadows.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Mountains of Southwest China: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [3]: PA0509 Hengduan Mountains subalpine conifer forests; PA0516 Nujiang Langcang Gorge alpine conifer and mixed forests; PA0518 Qionglai-Minshan conifer forests.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: New Caledonia: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [2]: AA0113 New Caledonia rain forests; AA0202 New Caledonia dry forests.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: New Zealand: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [15]: AA0109 Lord Howe Island subtropical forests; AA0114 Norfolk Island subtropical forests; AA0401 Chatham Island temperate forests; AA0403 Fiordland temperate forests; AA0404 Nelson Coast temperate forests; AA0405 North Island temperate forests; AA0406 Northland temperate kauri forests; AA0407 Rakiura Island temperate forests; AA0408 Richmond temperate forests; AA0410 Southland temperate forests; AA0414 Westland temperate forests; AA0801 Cantebury-Otago tussock grasslands; AA1003 South Island montane grasslands; AA1101 Antipodes Subantarctic Islands tundra; OC0107 Kermadec Islands subtropical moist forests.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Philippines: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [9]: IM0114 Greater Negros-Panay rain forests; IM0122 Luzon montane rain forests; IM0123 Luzon rain forests; IM0128 Mindanao montane rain forests; IM0129 Mindanao-Eastern Visayas rain forests; IM0130 Mindoro rain forests; IM0143 Palawan rain forests; IM0156 Sulu Archipelago rain forests; IM0302 Luzon tropical pine forests.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Polynesia-Micronesia: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [22]: OC0101 Carolines tropical moist forests; OC0102 Central Polynesian tropical moist forests; OC0103 Cook Islands tropical moist forests; OC0104 Eastern Micronesia tropical moist forests; OC0105 Fiji tropical moist forests; OC0106 Hawaii tropical moist forests; OC0108 Marquesas tropical moist forests; OC0110 Palau tropical moist forests; OC0111 Rapa Nui subtropical broadleaf forests; OC0112 Samoan tropical moist forests; OC0113 Society Islands tropical moist forests; OC0114 Tongan tropical moist forests; OC0115 Tuamotu tropical moist forests; OC0116 Tubuai tropical moist forests; OC0117 Western Polynesian tropical moist forests; OC0201 Fiji tropical dry forests; OC0202 Hawaii tropical dry forests; OC0203 Marianas tropical dry forests; OC0204 Yap tropical dry forests; OC0701 Hawaii tropical high shrublands; OC0702 Hawaii tropical low shrublands; OC0703 Northwestern Hawaii scrub.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Southwest Australia: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [6]: AA1201 Coolgardie woodlands; AA1202 Esperance mallee; AA1204 Jarrah-Karri forest and shrublands AA1205 Swan Coastal Plain Scrub and Woodlands; AA1209 Southwest Australia savanna; AA1210 Southwest Australia woodlands.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Succulent Karoo: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [1]: AT1322 Succulent Karoo.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Sundaland: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [22]: IM0102 Borneo lowland rain forests; IM0103 Borneo montane rain forests; IM0104 Borneo peat swamp forests; IM0110 Christmas and Cocos Islands tropical forests; IM0112 Eastern Java-Bali montane rain forests; IM0113 Eastern Java-Bali rain forests; IM0127 Mentawai Islands rain forests; IM0133 Nicobar Islands rain forests; IM0144 Peninsular Malaysian montane rain forests; IM0145 Peninsular Malaysian peat swamp forests; IM0146 Peninsular Malaysian rain forests; IM0153 Southwest Borneo freshwater swamp forests; IM0157 Sumatran freshwater swamp forests; IM0158 Sumatran lowland rain forests; IM0159 Sumatran montane rain forests; IM0160 Sumatran peat swamp forests; IM0161 Sundaland heath forests; IM0167 Western Java montane rain forests; IM0168 Western Java rain forests; IM0304 Sumatran tropical pine forests; IM1001 Kinabalu montane alpine meadows; IM1405 Sunda Shelf mangroves.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Tropical Andes: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [23]: NT0105 Bolivian Yungas; NT0109 Cauca Valley montane forests; NT0117 Cordillera La Costa montane forests; NT0118 Cordillera Oriental montane forests; NT0121 Eastern Cordillera real montane forests; NT0136 Magdalena Valley montane forests; NT0145 Northwestern Andean montane forests; NT0153 Peruvian Yungas; NT0159 Santa Marta montane forests; NT0165 Southern Andean Yungas; NT0175 Venezuelan Andes montane forests; NT0206 Bolivian montane dry forests; NT0207 Cauca Valley dry forests; NT0221 Magdalena Valley dry forests; NT0223 Marañón dry forests; NT0225 Patía Valley dry forests; NT1001 Central Andean dry puna; NT1002 Central Andean puna; NT1003 Central Andean wet puna; NT1004 Cordillera Central páramo; NT1005 Cordillera de Merida páramo; NT1006 Northern Andean páramo; NT1007 Santa Marta páramo.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Tumbes-Chocó-Magdalena: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [9]: NT0115 Chocó-Darién moist forests; NT0122 Eastern Panamanian montane forests; NT0137 Magdalena-Urabá moist forests; NT0178 Western Ecuador moist forests; NT0214 Ecuadorian dry forests; NT0232 Tumbes-Piura dry forests; NT1307 Galápagos Islands scrubland mosaic; NT1311 Malpelo Island xeric scrub; NT1405 South American Pacific mangroves.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Wallacea: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [9]: AA0102 Banda Sea Islands moist deciduous forests; AA0104 Buru rain forests; AA0106 Halmahera rain forests; AA0118 Seram rain forests; AA0123 Sulawesi lowland rain forests; AA0124 Sulawesi montane rain forests; AA0201 Lesser Sundas deciduous forests; AA0203 Sumba deciduous forests; AA0204 Timor and Wetar deciduous forests.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+    Process_Step:
+      Process_Description: Western Ghats and Sri Lanka: Based on the limits of the following WWF ecoregion boundaries:Ecoregions [7]: IM0154 Sri Lanka lowland rain forests; IM0155 Sri Lanka montane rain forests; IM0212 Sri Lanka dry-zone dry evergreen forests; IM0134 North Western Ghats moist deciduous forests; IM0135 North Western Ghats montane rain forests; IM0150 South Western Ghats moist deciduous forests; IM0151 South Western Ghats montane rain forests.  Coastline was altered with the VMAP0 coastline if needed to create a common coastline for all hotspots.
+      Source_Used_Citation_Abbreviation: VMAP0
+      Source_Used_Citation_Abbreviation: WWF Ecoregions
+      Process_Date: 2004
+      Process_Contact:
+        Contact_Information:
+          Contact_Organization_Primary:
+            Contact_Organization: Conservation International
+  Cloud_Cover: NA
+Spatial_Data_Organization_Information:
+  Direct_Spatial_Reference_Method: Vector
+  Point_and_Vector_Object_Information:
+    SDTS_Terms_Description:
+      SDTS_Point_and_Vector_Object_Type: G-polygon
+      Point_and_Vector_Object_Count: 51
+Spatial_Reference_Information:
+  Horizontal_Coordinate_System_Definition:
+    Geographic:
+      Latitude_Resolution: 0.000001
+      Longitude_Resolution: 0.000001
+      Geographic_Coordinate_Units: Decimal degrees
+    Geodetic_Model:
+      Horizontal_Datum_Name: D_WGS_1984
+      Ellipsoid_Name: WGS_1984
+      Semi-major_Axis: 6378137.000000
+      Denominator_of_Flattening_Ratio: 298.257224
+  Vertical_Coordinate_System_Definition:
+    Altitude_System_Definition:
+      Altitude_Encoding_Method: Explicit elevation coordinate included with horizontal coordinates
+Entity_and_Attribute_Information:
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: hotspots_revisited_2004_polygons
+    Attribute:
+      Attribute_Label: FID
+      Attribute_Definition: Internal feature number.
+      Attribute_Definition_Source: ESRI
+      Attribute_Domain_Values:
+        Unrepresentable_Domain: Sequential unique whole numbers that are automatically generated.
+    Attribute:
+      Attribute_Label: Shape
+      Attribute_Definition: Feature geometry.
+      Attribute_Definition_Source: ESRI
+      Attribute_Domain_Values:
+        Unrepresentable_Domain: Coordinates defining the features.
+    Attribute:
+      Attribute_Label: NAME
+      Attribute_Definition: Hotspot name
+    Attribute:
+      Attribute_Label: TYPE
+      Attribute_Definition: Description of the polygon type.
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: hotspot_area
+          Enumerated_Domain_Value_Definition: Terrestrial regions that are part of a hotspot
+        Enumerated_Domain:
+          Enumerated_Domain_Value: outer_limit
+          Enumerated_Domain_Value_Definition: Polygon that forms the limits of lines that group together islands and/or other patches of land that are part of a hotspot to form a single logical unit. The outer limit is not part of the hotspot itself but is used for display purposes and to form a grouping of regions that define the hotspot.
+    Attribute:
+      Attribute_Label: NAME_TYPE
+      Attribute_Definition: Hotspot name combined with the polygon type
+    Attribute:
+      Attribute_Label: LEGEND
+      Attribute_Definition: A field useful for making legends for display purposes. All hotspot outer limits have been given the same value so they can all be displayed with the same symbol if desired.
+Distribution_Information:
+  Resource_Description: Downloadable Data
+  Standard_Order_Process:
+    Digital_Form:
+      Digital_Transfer_Information:
+        Transfer_Size: 16.950
+Metadata_Reference_Information:
+  Metadata_Date: 20050215
+  Metadata_Contact:
+    Contact_Information:
+      Contact_Organization_Primary:
+        Contact_Organization: Conservation Synthesis, Center for Applied Biodiversity Science
+      Contact_Position: Coordinator, Conservation Synthesis
+      Contact_Address:
+        Address_Type: mailing and physical address
+        City: 1919 M Street ,NW, Suite 600
+        State_or_Province: Washington
+        Postal_Code: District of Columbia
+        Country: 20036
+      Contact_Voice_Telephone: +1 202 912 1000
+      Contact_Facsimile_Telephone: +1 202 912 0773
+      Contact_Electronic_Mail_Address: hotspots@conservation.org
+  Metadata_Standard_Name: FGDC Content Standards for Digital Geospatial Metadata
+  Metadata_Standard_Version: FGDC-STD-001-1998
+  Metadata_Time_Convention: local time
+  Metadata_Extensions:
+    Online_Linkage: http://www.esri.com/metadata/esriprof80.html
+    Profile_Name: ESRI Metadata Profile
+  Metadata_Extensions:
+    Online_Linkage: http://www.esri.com/metadata/esriprof80.html
+    Profile_Name: ESRI Metadata Profile

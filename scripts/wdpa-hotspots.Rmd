@@ -1,0 +1,47 @@
+---
+title: "wdpa"
+author: "Millie Chapman"
+date: "2/21/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# load packages
+library(tidyverse)
+library(dplyr)
+library(gridExtra)
+library(ggmap)
+library(ggpubr)
+```
+
+```{r}
+wdpa<- read_csv("data/WDPA_Nov2019-csv.csv")
+```
+
+```{r fig.height= 3.5, fig.width= 2.5}
+yr <- wdpa %>% 
+  filter(MARINE == "0") %>%
+  group_by(STATUS_YR) %>%
+  summarise(area = sum(REP_AREA)) 
+
+yr3 <- wdpa %>% filter(ISO3 %in% c("CHN", "USA", "IND", "BRA"), STATUS_YR > 1980) %>% 
+  filter(MARINE == "0") %>%
+  group_by(STATUS_YR, ISO3) %>%
+  summarise(area = sum(REP_AREA)) 
+
+
+yrIUCN <- wdpa %>% filter(IUCN_CAT == c("III","IV", "V")) %>%
+  filter(MARINE == "0") %>%
+  group_by(STATUS_YR, IUCN_CAT) %>%
+  summarise(area = sum(REP_AREA)) 
+
+a <-yr %>% ggplot(aes(STATUS_YR, area)) + geom_line(color = "blue") + xlim(1980, 2018) + geom_vline(xintercept = c(2000,2011), linetype = "longdash", color = c("red", "black")) + theme(legend.position="bottom") + labs(y = "Area added (Ha)", x = "Year") + theme_minimal() 
+
+
+b<- yrIUCN %>% ggplot(aes(STATUS_YR, area)) + geom_line(aes(colour = factor(IUCN_CAT))) + xlim(1980, 2018) +  geom_vline(xintercept = c(2000, 2011), linetype = "longdash", color = c("red", "black")) +  theme_minimal() + theme(legend.position=c(.2, .8))+ theme(legend.title = element_blank()) + labs(y = "Area added (Ha)", x = "Year") 
+
+ggarrange(a, b,
+          labels = c("A", "B"),
+          ncol = 1, nrow = 2)
+```
+
