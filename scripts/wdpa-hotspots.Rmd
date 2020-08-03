@@ -12,36 +12,112 @@ library(dplyr)
 library(gridExtra)
 library(ggmap)
 library(ggpubr)
+library(sf)
 ```
 
 ```{r}
-wdpa<- read_csv("data/WDPA_Nov2019-csv.csv")
+wdpa<- st_read("../data/WDPA_Jul2020-shapefile0/WDPA_Jul2020-shapefile-polygons.shp")
 ```
 
-```{r fig.height= 3.5, fig.width= 2.5}
-yr <- wdpa %>% 
-  filter(MARINE == "0") %>%
-  group_by(STATUS_YR) %>%
-  summarise(area = sum(REP_AREA)) 
+```{r}
+wdpa_usa <- wdpa %>% 
+  filter(ISO3 == "USA")
+```
 
-yr3 <- wdpa %>% filter(ISO3 %in% c("CHN", "USA", "IND", "BRA"), STATUS_YR > 1980) %>% 
-  filter(MARINE == "0") %>%
-  group_by(STATUS_YR, ISO3) %>%
-  summarise(area = sum(REP_AREA)) 
+```{r}
+cpad <- st_read("../data/CPAD_2020a/CPAD_2020a_Units.shp")
+cpad %>% filter(YR_EST >1990)%>% filter(MARINE ==0) %>% select(UNIT_ID)  %>%plot()
+```
 
+```{r}
+cced <- st_read("../data/CCED_2020a/CCED_2020a.shp")
+cced %>% filter(year_est >1990) %>% select(cced_id) %>% plot()
+```
 
-yrIUCN <- wdpa %>% filter(IUCN_CAT == c("III","IV", "V")) %>%
-  filter(MARINE == "0") %>%
-  group_by(STATUS_YR, IUCN_CAT) %>%
-  summarise(area = sum(REP_AREA)) 
+```{r}
+sig_hab <- st_read("../data/Terrestrial_Significant_Habitats_Summary_-_ACE_[ds2721]-shp/Terrestrial_Significant_Habitats_Summary_-_ACE_[ds2721].shp")
 
-a <-yr %>% ggplot(aes(STATUS_YR, area)) + geom_line(color = "blue") + xlim(1980, 2018) + geom_vline(xintercept = c(2000,2011), linetype = "longdash", color = c("red", "black")) + theme(legend.position="bottom") + labs(y = "Area added (Ha)", x = "Year") + theme_minimal() 
+sig_hab <- as.tibble(sig_hab) %>%
+  select(Hex_ID, TerrHabRan, TerrHabTot)
+```
 
+```{r}
+connectivity <- st_read("../data/Terrestrial_Connectivity_-_ACE_[ds2734]-shp/")
+```
 
-b<- yrIUCN %>% ggplot(aes(STATUS_YR, area)) + geom_line(aes(colour = factor(IUCN_CAT))) + xlim(1980, 2018) +  geom_vline(xintercept = c(2000, 2011), linetype = "longdash", color = c("red", "black")) +  theme_minimal() + theme(legend.position=c(.2, .8))+ theme(legend.title = element_blank()) + labs(y = "Area added (Ha)", x = "Year") 
+```{r}
+connectivity %>% filter(County == "ALAMEDA") %>% select(OBJECTID) %>% plot()
+sig_hab %>% filter(County == "ALAMEDA") %>% select(OBJECTID) %>% plot()
 
-ggarrange(a, b,
-          labels = c("A", "B"),
-          ncol = 1, nrow = 2)
+int %>%filter(County == "ALAMEDA") %>% select(geometry) %>% plot()
+```
+
+transform
+
+```{r}
+cced <- st_transform(cced, 4326)
+cpad <- st_transform(cpad, 4326)
+```
+
+```{r}
+int_c_pa <- as_tibble(st_intersection(connectivity, cpad))
+int_c_pa %>% filter(County == "MONTEREY") %>% select(geometry) %>% plot()
+ccedb<- st_buffer(cced, dist = 0)
+int_c_ce <- as_tibble(st_intersection(connectivity, ccedb))
+int_c_ce %>% filter(County == "ALAMEDA") %>% select(geometry) %>% plot()
+```
+
+```{r}
+int_c_ce$ce_area<- st_area(int_c_ce$geometry)
+
+int_c_pa$pa_area<- st_area(int_c_pa$geometry)
+```
+
+```{r}
+paArea <- int_c_pa %>%
+  group_by(Hex_ID) %>%  
+  mutate(pa_area = as.numeric(pa_area)) %>%
+  summarise(paArea = sum(pa_area))
+
+ceArea <- int_c_ce %>%
+  group_by(Hex_ID) %>%
+  mutate(ce_area = as.numeric(ce_area)) %>%
+  summarise(ceArea = sum(ce_area))
+```
+
+```{r}
+all <- connectivity %>%
+  full_join(ceArea) %>%
+  full_join(paArea) 
+ 
+all$tot_area <- st_area(all$geometry)
+
+all <- all %>%
+  mutate(tot_area = as.numeric(tot_area)) 
+
+all <- all %>%
+  full_join(sig_hab) %>%
+  mutate(perc_pa = paArea/tot_area,
+         perc_ce = ceArea/tot_area) %>%
+  mutate(perc_pa = replace_na(perc_pa, 0),
+         perc_ce = replace_na(perc_ce, 0))
+```
+
+```{r}
+all %>% select(TerrHabTot, perc_pa, perc_ce) %>%
+  group_by(TerrHabTot) %>%
+  summarise(perc_pa = mean(perc_pa),
+            perc_ce = mean(perc_ce))
+```
+
+```{r}
+all %>% select(Connectivi, perc_pa, perc_ce) %>%
+  group_by(Connectivi) %>%
+  summarise(perc_pa = mean(perc_pa),
+            perc_ce = mean(perc_ce))
+```
+
+```{r}
+
 ```
 
