@@ -2,7 +2,7 @@
 title: "wdpa"
 author: "Millie Chapman"
 date: "2/21/2020"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -48,7 +48,7 @@ cced <- st_transform(cced, 4326)
 cpad <- st_transform(cpad, 4326)
 ```
 
-```{r}
+```{r cache = TRUE}
 int_c_pa <- as_tibble(st_intersection(connectivity, cpad))
 int_c_pa %>% filter(County == "MONTEREY") %>% select(geometry) %>% plot()
 ccedb<- st_buffer(cced, dist = 0)
@@ -167,10 +167,11 @@ ggarrange(p,c, nrow = 2)
 
 
 ```{r}
+
 paArea_yr <- int_c_pa %>%
-  group_by(Hex_ID) %>%  
   mutate(pa_area = as.numeric(pa_area)) %>%
-  summarise(paArea = sum(pa_area),
+  group_by(YR_EST) %>%  
+  summarise(paArea = sum(pa_area) ,
             yr_est = mean(YR_EST))
 
 ceArea_yr <- int_c_ce %>%
@@ -192,53 +193,7 @@ ceArea_yr <- ceArea_yr %>%
   mutate(yr_est_ce = as.factor(round(yr_est, 0)))
 ```
 
-```{r}
-time <- connectivity %>%
-  left_join(ceArea_yr) %>%
-  left_join(paArea_yr, by = "Hex_ID") 
- 
-time$tot_area <- st_area(time$geometry)
-
-time <- time %>%
-  mutate(tot_area = as.numeric(tot_area)) 
-
-time <- time %>%
-  full_join(sig_hab) %>%
-  mutate(perc_pa = paArea/tot_area,
-         perc_ce = ceArea/tot_area) %>%
-  mutate(perc_pa = replace_na(perc_pa, 0),
-         perc_ce = replace_na(perc_ce, 0))
-
-mean(time$perc_pa)
-
-timeplotpa_connectivity <- time %>%
-  group_by(yr_est_pa) %>%
-  summarise(total_area = sum(tot_area))
-    connectivity = (perc_pa * Connectivi)/tot_area)
-
-```
-
-```{r}
-habitat_total_ce <- aichi %>% select(TerrHabTot, perc_pa, perc_ce, time_ce, time_pa) %>%
-  #filter(aich > 1) %>%
-  mutate(time_pa = replace_na(time_pa, 0),
-         time_ce = replace_na(time_ce, 0)) %>%
-  group_by(TerrHabTot, time_ce) %>%
-  summarise(perc_ce = mean(perc_ce))
-```
-
-```{r}
-p <- habitat_total_ce %>% ggplot(aes(x = TerrHabTot, y = perc_ce, color = as.factor(time_ce)))  + 
-  geom_point(shape=19, size=3) + theme_minimal() + 
-  labs( x="Total significant habitat coverage count", y = "Mean percent covered \n by protected areas")
-
-c <- habitat_total %>% ggplot(aes(x = TerrHabTot, y = perc_ce, color = aich.x)) + 
-  geom_point(shape=19, size=3) + theme_minimal() + 
-  labs( x="Total significant habitat coverage count", y = "Mean percent covered \n by conservation easement")
-
-ggarrange(p,c, nrow = 2) 
 
 
-```
 ```
 
