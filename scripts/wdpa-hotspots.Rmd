@@ -15,18 +15,10 @@ library(ggpubr)
 library(sf)
 ```
 
-```{r}
-wdpa<- st_read("../data/WDPA_Jul2020-shapefile0/WDPA_Jul2020-shapefile-polygons.shp")
-```
-
-```{r}
-wdpa_usa <- wdpa %>% 
-  filter(ISO3 == "USA")
-```
 
 ```{r}
 cpad <- st_read("../data/CPAD_2020a/CPAD_2020a_Units.shp")
-cpad %>% filter(YR_EST >1990)%>% filter(MARINE ==0) %>% select(UNIT_ID)  %>%plot()
+cpad %>% filter(YR_EST >1990) %>% select(UNIT_ID)  %>%plot()
 ```
 
 ```{r}
@@ -47,9 +39,6 @@ connectivity <- st_read("../data/Terrestrial_Connectivity_-_ACE_[ds2734]-shp/")
 
 ```{r}
 connectivity %>% filter(County == "ALAMEDA") %>% select(OBJECTID) %>% plot()
-sig_hab %>% filter(County == "ALAMEDA") %>% select(OBJECTID) %>% plot()
-
-int %>%filter(County == "ALAMEDA") %>% select(geometry) %>% plot()
 ```
 
 transform
@@ -87,8 +76,8 @@ ceArea <- int_c_ce %>%
 
 ```{r}
 all <- connectivity %>%
-  full_join(ceArea) %>%
-  full_join(paArea) 
+  left_join(ceArea) %>%
+  left_join(paArea) 
  
 all$tot_area <- st_area(all$geometry)
 
@@ -101,23 +90,155 @@ all <- all %>%
          perc_ce = ceArea/tot_area) %>%
   mutate(perc_pa = replace_na(perc_pa, 0),
          perc_ce = replace_na(perc_ce, 0))
+
+mean(all$perc_ce)
+mean(all$perc_pa)
 ```
 
 ```{r}
-all %>% select(TerrHabTot, perc_pa, perc_ce) %>%
+habitat_total <- all %>% select(TerrHabTot, perc_pa, perc_ce) %>%
   group_by(TerrHabTot) %>%
   summarise(perc_pa = mean(perc_pa),
             perc_ce = mean(perc_ce))
 ```
 
 ```{r}
-all %>% select(Connectivi, perc_pa, perc_ce) %>%
+p <- habitat_total %>% ggplot(aes(x = TerrHabTot, y = perc_pa))  + 
+  geom_point(shape=19, fill="blue", color="darkred", size=3) + theme_minimal() + 
+  labs( x="Total significant habitat coverage count", y = "Mean percent covered \n by protected areas")
+c <- habitat_total %>% ggplot(aes(x = TerrHabTot, y = perc_ce)) + 
+  geom_point(shape=19, fill="blue", color="darkred", size=3) + theme_minimal() + 
+  labs( x="Total significant habitat coverage count", y = "Mean percent covered \n by conservation easement")
+
+ggarrange(p,c, nrow = 2) 
+
+
+```
+
+```{r}
+connectivity_total <- all %>% select(Connectivi, perc_pa, perc_ce) %>%
   group_by(Connectivi) %>%
   summarise(perc_pa = mean(perc_pa),
             perc_ce = mean(perc_ce))
 ```
 
 ```{r}
+p <- connectivity_total %>% ggplot(aes(x = Connectivi, y = perc_pa))+ 
+  geom_point(shape=19, fill="blue", color="darkred", size=3) + theme_minimal() + 
+  labs( x="Connectivity metric", y = "Mean percent covered \n by protected areas")
+c <- connectivity_total %>% ggplot(aes(x = Connectivi, y = perc_ce)) + 
+  geom_point(shape=19, fill="blue", color="darkred", size=3) + theme_minimal() + 
+  labs( x="Connectivity metric", y = "Mean percent covered \n by conservation easements")
 
+ggarrange(p,c, nrow = 2) 
+
+```
+
+```{r}
+biodiversity <- st_read("../data/Species_Biodiversity_-_ACE_%5Bds2769%5D-shp/Species_Biodiversity_-_ACE_%5Bds2769%5D.shp")
+
+biodiversity <- as.tibble(biodiversity) 
+
+biodiv <- biodiversity %>%
+  select(Hex_ID, NtvSpRnkEc, RarRnkEco, TerrClimRa, SpBioRnkEc)
+
+all <- all %>%
+  full_join(biodiv) 
+```
+
+```{r}
+biodiversity_total <- all %>% select(SpBioRnkEc, perc_pa, perc_ce) %>%
+  group_by(SpBioRnkEc) %>%
+  summarise(perc_pa = mean(perc_pa, na.rm = TRUE),
+            perc_ce = mean(perc_ce, na.rm = TRUE))
+```
+
+```{r}
+p <- biodiversity_total %>% ggplot(aes(x = SpBioRnkEc, y = perc_pa))+ 
+  geom_point(shape=19, fill="blue", color="darkred", size=3) + theme_minimal() + 
+  labs( x="Biodiversity metric", y = "Mean percent covered \n by protected areas")
+c <- biodiversity_total %>% ggplot(aes(x = SpBioRnkEc, y = perc_ce)) + 
+  geom_point(shape=19, fill="blue", color="darkred", size=3) + theme_minimal() + 
+  labs( x="Biodiversity metric", y = "Mean percent covered \n  by conservation easements")
+
+ggarrange(p,c, nrow = 2) 
+```
+
+
+
+```{r}
+paArea_yr <- int_c_pa %>%
+  group_by(Hex_ID) %>%  
+  mutate(pa_area = as.numeric(pa_area)) %>%
+  summarise(paArea = sum(pa_area),
+            yr_est = mean(YR_EST))
+
+ceArea_yr <- int_c_ce %>%
+  group_by(Hex_ID) %>%
+  mutate(ce_area = as.numeric(ce_area)) %>%
+  summarise(ceArea = sum(ce_area),
+            yr_est = mean(year_est))
+```
+
+
+```{r}
+paArea_yr <- paArea_yr %>%
+  filter(yr_est>0) %>%
+  mutate(yr_est_pa = as.factor(round(yr_est, 0)))
+
+
+ceArea_yr <- ceArea_yr %>%
+  filter(yr_est>0) %>%
+  mutate(yr_est_ce = as.factor(round(yr_est, 0)))
+```
+
+```{r}
+time <- connectivity %>%
+  left_join(ceArea_yr) %>%
+  left_join(paArea_yr, by = "Hex_ID") 
+ 
+time$tot_area <- st_area(time$geometry)
+
+time <- time %>%
+  mutate(tot_area = as.numeric(tot_area)) 
+
+time <- time %>%
+  full_join(sig_hab) %>%
+  mutate(perc_pa = paArea/tot_area,
+         perc_ce = ceArea/tot_area) %>%
+  mutate(perc_pa = replace_na(perc_pa, 0),
+         perc_ce = replace_na(perc_ce, 0))
+
+mean(time$perc_pa)
+
+timeplotpa_connectivity <- time %>%
+  group_by(yr_est_pa) %>%
+  summarise(total_area = sum(tot_area))
+    connectivity = (perc_pa * Connectivi)/tot_area)
+
+```
+
+```{r}
+habitat_total_ce <- aichi %>% select(TerrHabTot, perc_pa, perc_ce, time_ce, time_pa) %>%
+  #filter(aich > 1) %>%
+  mutate(time_pa = replace_na(time_pa, 0),
+         time_ce = replace_na(time_ce, 0)) %>%
+  group_by(TerrHabTot, time_ce) %>%
+  summarise(perc_ce = mean(perc_ce))
+```
+
+```{r}
+p <- habitat_total_ce %>% ggplot(aes(x = TerrHabTot, y = perc_ce, color = as.factor(time_ce)))  + 
+  geom_point(shape=19, size=3) + theme_minimal() + 
+  labs( x="Total significant habitat coverage count", y = "Mean percent covered \n by protected areas")
+
+c <- habitat_total %>% ggplot(aes(x = TerrHabTot, y = perc_ce, color = aich.x)) + 
+  geom_point(shape=19, size=3) + theme_minimal() + 
+  labs( x="Total significant habitat coverage count", y = "Mean percent covered \n by conservation easement")
+
+ggarrange(p,c, nrow = 2) 
+
+
+```
 ```
 
