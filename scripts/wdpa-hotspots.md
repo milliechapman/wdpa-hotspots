@@ -150,7 +150,12 @@ biodiversity <- st_read("../data/Species_Biodiversity_-_ACE_%5Bds2769%5D-shp/Spe
 
 ``` r
 biodiversity <- as.tibble(biodiversity) 
+```
 
+    ## Warning: `as.tibble()` is deprecated, use `as_tibble()` (but mind the new semantics).
+    ## This warning is displayed once per session.
+
+``` r
 biodiv <- biodiversity %>%
   select(Hex_ID, NtvSpRnkEc, RarRnkEco, TerrClimRa, SpBioRnkEc)
 ```
@@ -206,7 +211,8 @@ habitat_total <- as.tibble(all) %>% select(TerrHabTot, paArea, ceArea, tot_area)
   summarise(perc_pa = sum(paArea, na.rm = TRUE)/areapa,
             perc_ce = sum(ceArea, na.rm = TRUE)/areace,
             california = sum(tot_area)/areaca) %>%
-  pivot_longer(-TerrHabTot, names_to = "protection", values_to = "percent_area")
+  pivot_longer(-TerrHabTot, names_to = "protection", values_to = "percent_area") %>%
+  mutate(protection = recode(protection, perc_pa = "Protected area", perc_ce = "Conservation Easement", california = "All of California"))
 ```
 
 ``` r
@@ -215,7 +221,8 @@ connectivity_total <- as.tibble(all) %>% select(Connectivi, paArea, ceArea, tot_
   summarise(perc_pa = sum(paArea, na.rm = TRUE)/areapa,
             perc_ce = sum(ceArea, na.rm = TRUE)/areace,
             california = sum(tot_area)/areaca) %>%
-  pivot_longer(-Connectivi, names_to = "protection", values_to = "percent_area")
+  pivot_longer(-Connectivi, names_to = "protection", values_to = "percent_area") %>%
+  mutate(protection = recode(protection, perc_pa = "Protected area", perc_ce = "Conservation Easement", california = "All of California"))
 ```
 
 ``` r
@@ -224,7 +231,8 @@ richness_total <- as.tibble(all) %>% select(SpBioRnkEc, paArea, ceArea, tot_area
   summarise(perc_pa = sum(paArea, na.rm = TRUE)/areapa,
             perc_ce = sum(ceArea, na.rm = TRUE)/areace,
             california = sum(tot_area)/areaca) %>%
-  pivot_longer(-SpBioRnkEc, names_to = "protection", values_to = "percent_area")
+  pivot_longer(-SpBioRnkEc, names_to = "protection", values_to = "percent_area") %>%
+  mutate(protection = recode(protection, perc_pa = "Protected area", perc_ce = "Conservation Easement", california = "All of California"))
 ```
 
 ``` r
@@ -233,34 +241,69 @@ nativesp_total <- as.tibble(all) %>% select(NtvSpRnkEc, paArea, ceArea, tot_area
   summarise(perc_pa = sum(paArea, na.rm = TRUE)/areapa,
             perc_ce = sum(ceArea, na.rm = TRUE)/areace,
             california = sum(tot_area)/areaca) %>%
-  pivot_longer(-NtvSpRnkEc, names_to = "protection", values_to = "percent_area")
+  pivot_longer(-NtvSpRnkEc, names_to = "protection", values_to = "percent_area")  %>%
+  mutate(protection = recode(protection, perc_pa = "Protected area", perc_ce = "Conservation Easement", california = "All of California"))
 ```
 
 ``` r
 h <- habitat_total %>% ggplot(aes(x = TerrHabTot, y = percent_area, color = protection))  + 
   geom_line(aes(linetype=protection)) + theme_minimal() + scale_color_manual(values=c("black", "blue", "orange")) +   scale_linetype_manual(values=c("dashed", "solid", "solid"))+
-  labs( x="Total significant habitat coverage count", y = "Mean percent covered \n by protected areas")
+  labs( x="Significant habitat coverage", y = "Mean % covered")+ 
+  ylim(0, .4) + scale_x_continuous(breaks=seq(0,6,1)) +
+  theme(panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  theme(axis.text=element_text(size=10),
+        axis.title=element_text(size=10)) +
+   theme(legend.title = element_blank())
+
 
 c <-connectivity_total %>% ggplot(aes(x = Connectivi, y = percent_area, color = protection))  + 
   geom_line(aes(linetype=protection)) + theme_minimal() + scale_color_manual(values=c("black", "blue", "orange")) +   scale_linetype_manual(values=c("dashed", "solid", "solid"))+
-  labs( x="Total significant connectivity", y = "Mean percent covered \n by protected areas")
+  labs( x="Connectivity", y = "Mean % covered") +
+    ylim(0, .4)+
+    theme(panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  theme(axis.text=element_text(size=10),
+        axis.title=element_text(size=10))+
+   theme(legend.title = element_blank())
+
+
+
 
 r <-richness_total %>% ggplot(aes(x = SpBioRnkEc, y = percent_area, color = protection))  + 
   geom_line(aes(linetype=protection)) + theme_minimal() + scale_color_manual(values=c("black", "blue", "orange")) +   scale_linetype_manual(values=c("dashed", "solid", "solid"))+
-  labs( x="Total significant SpBioRnkEc", y = "Mean percent covered \n by protected areas")
+  labs( x="Species richness rank", y = "Mean % covered")+
+    ylim(0.1, .3)+
+    theme(panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  theme(axis.text=element_text(size=10),
+        axis.title=element_text(size=10))+
+   theme(legend.title = element_blank())
+
+
  
 n <-nativesp_total %>% ggplot(aes(x = NtvSpRnkEc, y = percent_area, color = protection))  + 
   geom_line(aes(linetype=protection)) + theme_minimal() + scale_color_manual(values=c("black", "blue", "orange")) +   scale_linetype_manual(values=c("dashed", "solid", "solid"))+
-  labs( x="Total significant SpBioRnkEc", y = "Mean percent covered \n by protected areas")
+  labs( x="Native species rank", y = "Mean % covered") +
+    ylim(0.1, .3)+
+    theme(panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  theme(axis.text=element_text(size=10),
+        axis.title=element_text(size=10),
+        title = element_text(size=10)) +
+  theme(legend.title = element_blank())
 
-ggarrange(h,c,r,n, ncol = 2, nrow = 2, common.legend = TRUE)
+
+
+ggarrange(h,c,r,n, ncol = 2, nrow = 2, common.legend = TRUE,labels = c("A", "B", "C", "D")
+)
 ```
 
     ## Warning: Removed 3 row(s) containing missing values (geom_path).
     
     ## Warning: Removed 3 row(s) containing missing values (geom_path).
 
-![](wdpa-hotspots_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![](wdpa-hotspots_files/figure-gfm/fig1-1.png)<!-- -->
 
 ``` r
 int_c_pa_all <- int_c_pa %>%
@@ -299,7 +342,7 @@ paArea_yr <- int_c_pa_all %>%
          mean_sighab = sig_hab/paArea,
          mean_richness = richness/paArea,
          mean_nativesp = nativesp/paArea,
-         pa_ce = "PA") %>%
+         pa_ce = "Protected areas") %>%
   select(YR_EST, mean_connect, mean_sighab,
          mean_nativesp,mean_richness, pa_ce)
 
@@ -325,10 +368,9 @@ ceArea_yr <- int_c_ce_all %>%
          mean_sighab = sig_hab/ceArea,
          mean_richness = richness/ceArea,
          mean_nativesp = nativesp/ceArea,
-         pa_ce = "ce") %>%
+         pa_ce = "Conservation easements") %>%
   select(YR_EST, mean_connect, mean_sighab,
-         mean_nativesp,mean_richness, pa_ce)
-
+         mean_nativesp,mean_richness, pa_ce) 
 
 metrics_yr <- ceArea_yr %>% 
   bind_rows(paArea_yr) 
@@ -338,24 +380,346 @@ metrics_yr <- ceArea_yr %>%
 c_yr <- metrics_yr %>%
   ggplot(aes(x = YR_EST, y = mean_connect, color = pa_ce))  + 
   geom_line() + theme_minimal() + scale_color_manual(values=c("blue", "orange")) +   
-  labs( x="Year", y = "Mean connectivity")
+  labs( x="Year", y = "Mean connectivity") +
+  geom_vline(xintercept  = 2000, linetype="dotted") +
+  theme(panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  theme(axis.text=element_text(size=10),
+        axis.title=element_text(size=10),
+        title = element_text(size=10)) +
+    theme(legend.title = element_blank()) +ylim(0,5)
+
 
 n_yr <- metrics_yr %>%
   ggplot(aes(x = YR_EST, y = mean_nativesp, color = pa_ce))  + 
   geom_line() + theme_minimal() + scale_color_manual(values=c("blue", "orange")) +   
-  labs( x="Year", y = "Mean native spp ranking")
+  labs( x="Year", y = "Mean native spp ranking") +
+  geom_vline(xintercept  = 2000, linetype="dotted")+
+  theme(panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  theme(axis.text=element_text(size=10),
+        axis.title=element_text(size=10),
+        title = element_text(size=10))+
+    theme(legend.title = element_blank()) +ylim(0,5)
+
+
 
 r_yr <- metrics_yr %>% 
   ggplot(aes(x = YR_EST, y = mean_richness, color = pa_ce))  + 
   geom_line() + theme_minimal() + scale_color_manual(values=c("blue", "orange")) +   
-  labs( x="Year", y = "Mean richness ranking")
+  labs( x="Year", y = "Mean richness ranking") +
+  geom_vline(xintercept  = 2000, linetype="dotted")+
+  theme(panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  theme(axis.text=element_text(size=10),
+        axis.title=element_text(size=10),
+        title = element_text(size=10))+
+    theme(legend.title = element_blank()) +ylim(0,5)
+
+
 
 h_yr <- metrics_yr %>% 
   ggplot(aes(x = YR_EST, y = mean_sighab, color = pa_ce))  + 
   geom_line() + theme_minimal() + scale_color_manual(values=c("blue", "orange")) +   
-  labs( x="Year", y = "Mean sig habitat ranking")
+  labs( x="Year", y = "Mean habitat ranking") +
+  geom_vline(xintercept  = 2000, linetype="dotted")+
+  theme(panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  theme(axis.text=element_text(size=10),
+        axis.title=element_text(size=10),
+        title = element_text(size=10))+
+    theme(legend.title = element_blank()) +ylim(0,5)
 
-ggarrange(h_yr,c_yr,r_yr,n_yr, ncol = 2, nrow = 2, common.legend = TRUE)
+ggarrange(h_yr,c_yr,r_yr,n_yr, ncol = 2, nrow = 2, common.legend = TRUE, labels = c("A", "B", "C", "D"))
 ```
 
-![](wdpa-hotspots_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![](wdpa-hotspots_files/figure-gfm/fig2-1.png)<!-- -->
+
+``` r
+paArea_hld <- int_c_pa_all %>%
+  mutate(pa_area = as.numeric(pa_area))
+
+pa_Area_total <- sum(paArea_hld$pa_area, na.rm = TRUE)
+
+paArea_hld <- paArea_hld %>% 
+  group_by(AGNCY_LEV) %>%  
+  summarise(paArea = sum(pa_area)/pa_Area_total,
+            connectivity = mean(Connectivi),
+            sig_hab = mean(TerrHabTot),
+            richness = mean(SpBioRnkEc),
+            nativesp = mean(NtvSpRnkEc)) %>%
+ # mutate(area_connect = paArea*connectivity) %>%
+  mutate(AGNCY_LEV = ifelse(paArea < 0.01,"Other", paste(AGNCY_LEV))) %>%
+  group_by(AGNCY_LEV) %>%  
+  summarise(connectivity = sum(paArea*connectivity),
+            sig_hab = sum(paArea*sig_hab),
+            richness = sum(paArea*richness),
+            nativesp = sum(paArea*nativesp),
+            paArea = sum(paArea)) %>%
+  mutate(mean_connect = connectivity/paArea,
+         mean_sighab = sig_hab/paArea,
+         mean_richness = richness/paArea,
+         mean_nativesp = nativesp/paArea,
+         pa_ce = "Protected areas",
+         Area = paArea) %>%
+  select(AGNCY_LEV, mean_connect, mean_sighab,
+         mean_nativesp,mean_richness, pa_ce, Area) %>% remove_missing()
+```
+
+    ## Warning: Factor `AGNCY_LEV` contains implicit NA, consider using
+    ## `forcats::fct_explicit_na`
+
+    ## Warning: Removed 1 rows containing missing values.
+
+``` r
+ceArea_hld <- int_c_ce_all %>%
+  mutate(ce_area = as.numeric(ce_area))
+
+ce_Area_total <- sum(ceArea_hld$ce_area)
+
+ceArea_hld <-  ceArea_hld %>% group_by(eholdtyp) %>%  
+  summarise(ceArea = sum(ce_area)/ce_Area_total,
+            connectivity = mean(Connectivi),
+            sig_hab = mean(TerrHabTot),
+            richness = mean(SpBioRnkEc),
+            nativesp = mean(NtvSpRnkEc)) %>%
+  mutate(AGNCY_LEV = eholdtyp) %>%
+  mutate(AGNCY_LEV = ifelse(ceArea < 0.02,"Other", paste(AGNCY_LEV))) %>%
+  group_by(AGNCY_LEV) %>%
+  summarise(connectivity = sum(ceArea*connectivity),
+            sig_hab = sum(ceArea*sig_hab),
+            richness = sum(ceArea*richness),
+            nativesp = sum(ceArea*nativesp),
+            ceArea = sum(ceArea)) %>%
+  mutate(mean_connect = connectivity/ceArea,
+         mean_sighab = sig_hab/ceArea,
+         mean_richness = richness/ceArea,
+         mean_nativesp = nativesp/ceArea,
+         pa_ce = "Conservation easements",
+         Area = ceArea) %>%
+  select(AGNCY_LEV, mean_connect, mean_sighab,
+         mean_nativesp,mean_richness, pa_ce, Area) 
+
+metrics_hld<- ceArea_hld %>% 
+  bind_rows(paArea_hld) %>%
+  pivot_longer(-c(AGNCY_LEV, Area, pa_ce)) %>% 
+  mutate(AGNCY_LEV = recode(AGNCY_LEV,
+    `Special District` = "Special \n District"
+  ))
+```
+
+``` r
+ce_means<- metrics_hld %>% filter(pa_ce == "Conservation easements") %>%
+  mutate(av = Area*value) %>%
+  group_by(name) %>%
+  summarise(mean = sum(av)/sum(Area))
+
+pa_means<- metrics_hld %>% filter(pa_ce == "Protected areas") %>%
+  mutate(av = Area*value) %>%
+  group_by(name) %>%
+  summarise(mean = sum(av)/sum(Area))
+```
+
+``` r
+ce_hab <- metrics_hld %>% filter(pa_ce == "Conservation easements" & name == c("mean_connect", "mean_sighab")) %>%
+  mutate(AGNCY_LEV = recode(AGNCY_LEV,
+     Federal = " Federal \n (14.7%) ",
+     NonProfit  = "NonProfit    \n (65.8%)",
+     State = "State \n (9.5%)",
+     Other = "Other \n (3.8%)",
+    `Special \n District` = "Special \n District \n (6.1%)"
+  )) %>%
+  ggplot(aes(x= reorder(AGNCY_LEV, -Area), y = value, color = name)) + geom_point(size = 3) + #+ geom_bar(stat='identity', position = 'dodge') +
+  scale_color_manual(values=c("#117733", "#DDCC77")) + theme_minimal() +
+  geom_hline(yintercept = as.numeric(ce_means[1,2]), linetype="dashed", color = "#117733", size =1) +
+  geom_hline(yintercept = as.numeric(ce_means[4,2]), linetype="dashed", color = "#DDCC77", size =1) +
+  theme(legend.title = element_blank(),
+        axis.title.x=element_blank(),
+        legend.position="top",
+        plot.title = element_text(size = 11, face = "bold"))+ylim(1.3,3.7) +
+  ylab("Mean value")+ggtitle("D. Conservation easements (habitat)")
+
+ce_bio <- metrics_hld %>% filter(pa_ce == "Conservation easements" & name == c("mean_nativesp", "mean_richness")) %>%
+  mutate(AGNCY_LEV = recode(AGNCY_LEV,
+     Federal = " Federal \n (14.7%) ",
+     NonProfit  = "NonProfit    \n (65.8%)",
+     State = "State \n (9.5%)",
+     Other = "Other \n (3.8%)",
+    `Special \n District` = "Special \n District \n (6.1%)"
+  )) %>%
+  ggplot(aes(x= reorder(AGNCY_LEV, -Area), y = value, color = name)) + geom_point(size = 3) + #+ geom_bar(stat='identity', position = 'dodge') +
+  scale_color_manual(values=c("#332288", "#88CCEE")) + theme_minimal() +
+  geom_hline(yintercept = as.numeric(ce_means[2,2]), linetype="dashed", color = "#332288", size =1) +
+  geom_hline(yintercept = as.numeric(ce_means[3,2]), linetype="dashed", color = "#88CCEE", size =1) +
+  theme(legend.title = element_blank(),
+        axis.title.x=element_blank(),
+        legend.position="top",
+        plot.title = element_text(size = 11, face = "bold"))+ylim(2.7,4.2) +
+  ylab("Mean value") +ggtitle("B. Conservation easements (biodiversity)")
+
+pa_hab <- metrics_hld %>% filter(pa_ce == "Protected areas" &  name == c("mean_connect", "mean_sighab")) %>%
+  mutate(AGNCY_LEV = recode(AGNCY_LEV,
+     Federal = " Federal \n (14.7%) ",
+     `Non Profit`   = "NonProfit    \n (1.2%)",
+     State = "State \n (6.0%)",
+     Other = "Other \n (0.8%)",
+    `Special \n District` = "Special \n District \n (1.5%)",
+    City = "City \n (1.4%)"
+  )) %>%
+  ggplot(aes(x = reorder(AGNCY_LEV, -Area), y = value, color = name)) + geom_point(size = 3)+theme_minimal() +
+  scale_color_manual(values=c("#117733", "#DDCC77")) +
+  geom_hline(yintercept = as.numeric(pa_means[1,2]), linetype="dashed", color = "#117733", size =1)+
+  geom_hline(yintercept = as.numeric(pa_means[4,2]), linetype="dashed", color = "#DDCC77", size =1) +
+  theme(legend.title = element_blank(),
+        legend.position="top",
+        axis.title.x=element_blank(),
+        plot.title = element_text(size = 11, face = "bold")) +ylim(1.3,3.7) +
+  ylab("Mean value")+ggtitle("C. Protected areas (habitat)")
+
+
+pa_bio <- metrics_hld %>% filter(pa_ce == "Protected areas" & name == c("mean_nativesp", "mean_richness")) %>%
+  mutate(AGNCY_LEV = recode(AGNCY_LEV,
+     Federal = " Federal \n (14.7%) ",
+     `Non Profit`   = "NonProfit    \n (1.2%)",
+     State = "State \n (6.0%)",
+     Other = "Other \n (0.8%)",
+    `Special \n District` = "Special \n District \n (1.5%)",
+    City = "City \n (1.4%)"
+  )) %>%
+  ggplot(aes(x= reorder(AGNCY_LEV, -Area), y = value, color = name)) + geom_point(size = 3) + #+ geom_bar(stat='identity', position = 'dodge') +
+  scale_color_manual(values=c("#332288", "#88CCEE")) + theme_minimal() +
+  geom_hline(yintercept = as.numeric(pa_means[2,2]), linetype="dashed", color = "#332288", size =1) +
+  geom_hline(yintercept = as.numeric(pa_means[3,2]), linetype="dashed", color = "#88CCEE", size =1) +
+  theme(legend.title = element_blank(),
+       legend.position="top",
+        axis.title.x=element_blank(),
+        plot.title = element_text(size = 11, face = "bold"))+ylim(2.7,4.2)+
+  ylab("Mean value")+ggtitle("A. Protected areas (biodiversity)")
+```
+
+``` r
+ggarrange(pa_bio,ce_bio,pa_hab,ce_hab, ncol = 2, nrow = 2, common.legend = FALSE)
+```
+
+![](wdpa-hotspots_files/figure-gfm/fig3a-1.png)<!-- -->
+
+``` r
+ggarrange(pa_hab,ce_hab, ncol = 2, nrow = 1, common.legend = TRUE)
+```
+
+![](wdpa-hotspots_files/figure-gfm/fig3b-1.png)<!-- -->
+
+``` r
+ce_duration <- int_c_ce_all %>%
+  mutate(ce_area = as.numeric(ce_area))
+
+ce_Area_total <- sum(ce_duration$ce_area)
+
+ce_duration <-  ce_duration %>%   
+  mutate(ceArea = ce_area/ce_Area_total) %>%
+  group_by(duration) %>%
+  summarise(connectivity = sum(ceArea*Connectivi),
+            sig_hab = sum(ceArea*TerrHabTot),
+            richness = sum(ceArea*SpBioRnkEc),
+            nativesp = sum(ceArea*NtvSpRnkEc),
+            ceArea = sum(ceArea)) %>%
+  mutate(mean_connect = connectivity/ceArea,
+         mean_sighab = sig_hab/ceArea,
+         mean_richness = richness/ceArea,
+         mean_nativesp = nativesp/ceArea,
+         pa_ce = "Conservation easements",
+         Area = ceArea) %>%
+  select(duration, mean_connect, mean_sighab,
+         mean_nativesp,mean_richness, pa_ce, Area) 
+```
+
+    ## Warning: Factor `duration` contains implicit NA, consider using
+    ## `forcats::fct_explicit_na`
+
+``` r
+ce_duration %>% filter(duration == "Permanent" | duration =="Temporary" |duration == "Unknown") %>%
+  mutate(duration = recode(duration,
+                Permanent = "Permanent (25.1%)",
+                Temporary = "Temporary (0.6%)",
+                Unknown = "Unknown (74.2%)")) %>%
+  select(-pa_ce, -Area) %>%
+  pivot_longer(-duration) %>%
+  mutate(name = recode(name,
+                 mean_connect = "Connectivity",
+                 mean_sighab = "Significant habitat",
+                 mean_richness = "Species richness",
+                 mean_nativesp = "Native species rank")) %>%
+  ggplot(aes(x = name, y = value, fill = duration)) + geom_bar(stat = "identity", position=position_dodge(width=0.7), width = 0.6) +
+  theme_minimal() + scale_fill_manual(values=c('#117733','#E69F00', '#999999')) +
+  theme(legend.title = element_blank(),
+        axis.title.x=element_blank(),
+        plot.title = element_text(size = 11, face = "bold"),
+        legend.position="bottom")+
+  ylab("mean value")
+```
+
+![](wdpa-hotspots_files/figure-gfm/fig4-1.png)<!-- -->
+
+``` r
+paArea_size <- int_c_pa_all %>% 
+  mutate(pa_area = as.numeric(pa_area)) %>%
+  group_by(UNIT_ID) %>%  
+  summarise(paArea = sum(pa_area),
+            connectivity = mean(Connectivi),
+            sig_hab = mean(TerrHabTot),
+            richness = mean(SpBioRnkEc),
+            nativesp = mean(NtvSpRnkEc))
+
+paArea_size %>% ggplot(aes(x= log(paArea), y = connectivity)) +geom_point() +  geom_jitter(width = 0.1, height = 0.1)
+```
+
+    ## Warning: Removed 1 rows containing missing values (geom_point).
+    
+    ## Warning: Removed 1 rows containing missing values (geom_point).
+
+![](wdpa-hotspots_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+
+``` r
+ggarrange(paArea_size %>% ggplot(aes(x= log(paArea), y = connectivity)) +geom_point() +  geom_jitter(width = 0.1, height = 0.1),
+          paArea_size %>% ggplot(aes(x= log(paArea), y = sig_hab)) +geom_point() +  geom_jitter(width = 0.1, height = 0.1),
+          paArea_size %>% ggplot(aes(x= log(paArea), y = richness)) +geom_point() +  geom_jitter(width = 0.1, height = 0.1),
+          paArea_size %>% ggplot(aes(x= log(paArea), y = nativesp)) +geom_point() +  geom_jitter(width = 0.1, height = 0.1), nrow = 2, ncol = 2
+)
+```
+
+    ## Warning: Removed 1 rows containing missing values (geom_point).
+    
+    ## Warning: Removed 1 rows containing missing values (geom_point).
+    
+    ## Warning: Removed 1 rows containing missing values (geom_point).
+    
+    ## Warning: Removed 1 rows containing missing values (geom_point).
+    
+    ## Warning: Removed 1 rows containing missing values (geom_point).
+    
+    ## Warning: Removed 1 rows containing missing values (geom_point).
+    
+    ## Warning: Removed 1 rows containing missing values (geom_point).
+    
+    ## Warning: Removed 1 rows containing missing values (geom_point).
+
+![](wdpa-hotspots_files/figure-gfm/unnamed-chunk-21-2.png)<!-- -->
+
+``` r
+ceArea_size <- int_c_ce_all %>%
+  mutate(ce_area = as.numeric(ce_area)) %>%
+  group_by(cced_id) %>%  
+  summarise(ceArea = sum(ce_area),
+            connectivity = mean(Connectivi),
+            sig_hab = mean(TerrHabTot),
+            richness = mean(SpBioRnkEc),
+            nativesp = mean(NtvSpRnkEc))
+
+ggarrange(ceArea_size %>% ggplot(aes(x= log(ceArea), y = connectivity)) +geom_point() +  geom_jitter(width = 0.1, height = 0.1),
+          ceArea_size %>% ggplot(aes(x= log(ceArea), y = sig_hab)) +geom_point() +  geom_jitter(width = 0.1, height = 0.1),
+          ceArea_size %>% ggplot(aes(x= log(ceArea), y = richness)) +geom_point() +  geom_jitter(width = 0.1, height = 0.1),
+          ceArea_size %>% ggplot(aes(x= log(ceArea), y = nativesp)) +geom_point() +  geom_jitter(width = 0.1, height = 0.1), nrow = 2, ncol = 2
+)
+```
+
+![](wdpa-hotspots_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
