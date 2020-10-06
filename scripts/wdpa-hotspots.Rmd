@@ -14,7 +14,7 @@ library(ggmap)
 library(ggpubr)
 library(sf)
 ```
-
+d
 
 ```{r, cache=TRUE}
 cpad <- st_read("../data/CPAD_2020a/CPAD_2020a_Units.shp")
@@ -583,5 +583,10 @@ ggarrange(ceArea_size %>% ggplot(aes(x= log(ceArea), y = connectivity)) +geom_po
           ceArea_size %>% ggplot(aes(x= log(ceArea), y = richness)) +geom_point() +  geom_jitter(width = 0.1, height = 0.1),
           ceArea_size %>% ggplot(aes(x= log(ceArea), y = nativesp)) +geom_point() +  geom_jitter(width = 0.1, height = 0.1), nrow = 2, ncol = 2
 )
+```
+
+
+```{r}
+
 ```
 

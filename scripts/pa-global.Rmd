@@ -1,0 +1,44 @@
+---
+title: "pa-global"
+author: "Millie Chapman"
+date: "10/5/2020"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(stars)
+```
+
+```{r}
+wdpa<- st_read("../data/WDPA_Jul2020-shapefile0/WDPA_Jul2020-shapefile-polygons.shp") 
+```
+
+```{r}
+hotspots<- st_read("../data/hotspots/hotspots_revisited_2004_polygons.shp")
+```
+
+```{r}
+pa_hotspots <-st_intersection(wdpa, hotspots)
+```
+
+
+```{r}
+pa_hotspots$area <- st_area(pa_hotspots$geometry)
+wdpa$area <- st_area(wdpa$geometry)
+
+st_write(pa_hotspots, "../data/pa_hotspots.shp")
+```
+
+```{r}
+pa_hotspots <- st_read("../data/pa_hotspots.shp")
+```
+
+```{r}
+z<- pa_hotspots %>% select(-geometry)
+
+yrs<- z %>%
+  group_by(STATUS_YR) %>%
+  summarise(area = sum(area))
+```
+
