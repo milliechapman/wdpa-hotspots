@@ -8,15 +8,35 @@ output: html_document
 ```{r}
 library(tidyverse)
 library(stars)
+library(wdpar)
+library(gridExtra)
 ```
 
 ```{r}
-wdpa<- st_read("../data/WDPA_Jul2020-shapefile0/WDPA_Jul2020-shapefile-polygons.shp") 
+#wdpa_US <- download.file("http://d1gam3xoknrgr2.cloudfront.net/current/WDPA_WDOECM_wdpa_shp.zip", "../data/wdpa.zip")
 ```
+
+```{r}
+#unzip("../data/wdpa.zip") 
+#unzip("../data/wdpa/WDPA_WDOECM_wdpa_shp1.zip")
+#wdpa <- st_read("../data/wdpa/WDPA_WDOECM_wdpa_shp-polygons.shp")
+#wdpa_usa <- wdpa %>%
+#  filter(ISO3 == "USA")
+
+#wdpa_usa <- wdpar::wdpa_clean(wdpa_usa)
+
+#st_write(wdpa_usa, "../data/wdpa/wdpa_clean_usa.shp")
+```
+
+```{r}
+wdpa_usa <- st_read("../data/wdpa/wdpa_clean_usa.shp")
+```
+
 
 ```{r}
 hotspots<- st_read("../data/hotspots/hotspots_revisited_2004_polygons.shp")
 ```
+
 
 ```{r}
 pa_hotspots <-st_intersection(wdpa, hotspots)
@@ -35,10 +55,397 @@ pa_hotspots <- st_read("../data/pa_hotspots.shp")
 ```
 
 ```{r}
-z<- pa_hotspots %>% select(-geometry)
+priority_index <- st_read("../data/GeoTIFFs_and_shapefiles/Priority_index_summary.shp")
+```
 
-yrs<- z %>%
-  group_by(STATUS_YR) %>%
-  summarise(area = sum(area))
+```{r}
+#wdpa_usa<- st_transform(wdpa_usa, crs = st_crs(priority_index))
+pa_priority <- st_intersection(st_buffer(wdpa_usa,0), st_buffer(priority_index,0))
+```
+
+```{r}
+ce <- st_read("../data/NCED_12182019_Shp/Conservation_Easements.shp")
+```
+
+```{r}
+ce<- st_transform(ce, crs = st_crs(priority_index))
+ce_priority <- st_intersection(st_buffer(ce,0), st_buffer(priority_index,0))
+```
+
+```{r}
+ce_priority$area <- st_area(ce_priority$geometry)
+pa_priority$area <- st_area(pa_priority$geometry)
+```
+
+```{r}
+st_write(ce_priority, "../data/ce_priority.shp")
+st_write(pa_priority, "../data/pa_priority.shp")
+```
+
+
+
+```{r}
+pa_all<- as.tibble(pa_priority) %>%
+  mutate(pa_ce = "pa") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_all<- as.tibble(ce_priority) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+all_priority_i <- pa_all %>% bind_rows(ce_all) %>%
+   mutate(crit = "all")
+all_priority_i
+```
+
+Amphibians
+```{r}
+amp_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Amphibians_priorities.shp")
+ce <- st_transform(ce, crs = st_crs(amp_priority))
+pa <- st_transform(wdpa_usa, crs = st_crs(amp_priority))
+am_ce <- st_intersection(st_buffer(ce,0), st_buffer(amp_priority,0))
+am_pa <- st_intersection(st_buffer(pa,0), st_buffer(amp_priority,0))
+```
+
+```{r}
+am_ce$area <- st_area(am_ce$geometry)
+am_pa$area <- st_area(am_pa$geometry)
+```
+
+
+```{r}
+pa_amp <- as.tibble(am_pa) %>%
+  mutate(pa_ce = "pa") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_amp<- as.tibble(am_ce) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+am_priority_i <- pa_amp %>% bind_rows(ce_amp) %>%
+   mutate(crit = "amphibians")
+am_priority_i
+```
+Birds
+```{r}
+bird_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Birds_priorities.shp")
+ce <- st_transform(ce, crs = st_crs(bird_priority))
+pa <- st_transform(wdpa_usa, crs = st_crs(bird_priority))
+bird_ce <- st_intersection(st_buffer(ce,0), st_buffer(bird_priority,0))
+bird_pa <- st_intersection(st_buffer(pa,0), st_buffer(bird_priority,0))
+```
+
+```{r}
+bird_ce$area <- st_area(bird_ce$geometry)
+bird_pa$area <- st_area(bird_pa$geometry)
+```
+
+
+```{r}
+pa_bird <- as.tibble(bird_pa) %>%
+  mutate(pa_ce = "pa") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_bird<- as.tibble(bird_ce) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+bird_priority_i <- pa_bird %>% bind_rows(ce_bird) %>%
+   mutate(crit = "birds")
+bird_priority_i
+```
+
+Fish
+```{r}
+fish_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Fish_priorities.shp")
+ce <- st_transform(ce, crs = st_crs(fish_priority))
+pa <- st_transform(wdpa_usa, crs = st_crs(fish_priority))
+fish_ce <- st_intersection(st_buffer(ce,0), st_buffer(fish_priority,0))
+fish_pa <- st_intersection(st_buffer(pa,0), st_buffer(fish_priority,0))
+```
+
+```{r}
+fish_ce$area <- st_area(fish_ce$geometry)
+fish_pa$area <- st_area(fish_pa$geometry)
+```
+
+
+```{r}
+pa_fish <- as.tibble(fish_pa) %>%
+  mutate(pa_ce = "pa") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_fish<- as.tibble(fish_ce) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+fish_priority_i <- pa_fish %>% bind_rows(ce_fish) %>%
+   mutate(crit = "fish")
+fish_priority_i
+```
+
+Mammals
+```{r}
+mammal_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Mammals_priorities.shp")
+ce <- st_transform(ce, crs = st_crs(mammal_priority))
+pa <- st_transform(wdpa_usa, crs = st_crs(mammal_priority))
+mammal_ce <- st_intersection(st_buffer(ce,0), st_buffer(mammal_priority,0))
+mammal_pa <- st_intersection(st_buffer(pa,0), st_buffer(mammal_priority,0))
+```
+
+```{r}
+mammal_ce$area <- st_area(mammal_ce$geometry)
+mammal_pa$area <- st_area(mammal_pa$geometry)
+```
+
+
+```{r}
+pa_mammal <- as.tibble(mammal_pa) %>%
+  mutate(pa_ce = "pa") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_mammal<- as.tibble(mammal_ce) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+mammal_priority_i <- pa_mammal %>% bind_rows(ce_mammal) %>%
+   mutate(crit = "mammals")
+mammal_priority_i
+```
+
+
+Reptiles
+```{r}
+reptile_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Reptiles_priorities.shp")
+ce <- st_transform(ce, crs = st_crs(reptile_priority))
+pa <- st_transform(wdpa_usa, crs = st_crs(reptile_priority))
+reptile_ce <- st_intersection(st_buffer(ce,0), st_buffer(reptile_priority,0))
+reptile_pa <- st_intersection(st_buffer(pa,0), st_buffer(reptile_priority,0))
+```
+
+```{r}
+reptile_ce$area <- st_area(reptile_ce$geometry)
+reptile_pa$area <- st_area(reptile_pa$geometry)
+```
+
+
+```{r}
+pa_reptile <- as.tibble(reptile_pa) %>%
+  mutate(pa_ce = "pa") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_reptile<- as.tibble(reptile_ce) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+reptile_priority_i <- pa_reptile %>% bind_rows(ce_reptile) %>%
+   mutate(crit = "reptiles")
+reptile_priority_i
+
+```
+Trees
+
+```{r}
+tree_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Trees_priorities.shp")
+ce <- st_transform(ce, crs = st_crs(tree_priority))
+pa <- st_transform(wdpa_usa, crs = st_crs(tree_priority))
+tree_ce <- st_intersection(st_buffer(ce,0), st_buffer(tree_priority,0))
+tree_pa <- st_intersection(st_buffer(pa,0), st_buffer(tree_priority,0))
+```
+
+```{r}
+tree_ce$area <- st_area(tree_ce$geometry)
+tree_pa$area <- st_area(tree_pa$geometry)
+```
+
+
+```{r}
+pa_tree <- as.tibble(tree_pa) %>%
+  mutate(pa_ce = "pa") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_tree<- as.tibble(tree_ce) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+tree_priority_i <- pa_tree %>% bind_rows(ce_tree) %>%
+    mutate(crit = "trees")
+tree_priority_i 
+
+```
+
+
+BAR CHART
+
+```{r}
+all_critters <-  bird_priority_i %>%
+  bind_rows(reptile_priority_i, mammal_priority_i, fish_priority_i, tree_priority_i, am_priority_i)
+all_critters <-all_critters %>%
+  mutate(pa_ce = recode(pa_ce, pa = "Protected areas", ce = "Conservation Easements"))
+write.csv(all_critters, "../data/all_critters_output.csv")
+```
+
+
+```{r}
+pa_all<- as.tibble(pa_priority) %>%
+  mutate(pa_ce = "pa") %>%
+  filter(MARINE == "terrestrial") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_all<- as.tibble(ce_priority) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+all_priority_i <- pa_all %>% bind_rows(ce_all) %>%
+   mutate(crit = "all")
+all_priority_i %>%
+  ggplot(aes(x = pa_ce, y =priority_i)) +geom_bar(stat = "identity")
+```
+
+
+
+```{r}
+#priority_index <- st_read("../data/GeoTIFFs_and_shapefiles/Priority_index_summary.shp")
+priority_index$area <- st_area(priority_index$geometry)
+tree_priority$area <-st_area(tree_priority$geometry)
+bird_priority$area <-st_area(bird_priority$geometry)
+reptile_priority$area <-st_area(reptile_priority$geometry)
+mammal_priority$area <-st_area(mammal_priority$geometry)
+fish_priority$area <-st_area(fish_priority$geometry)
+amp_priority$area <-st_area(amp_priority$geometry)
+```
+
+```{r}
+priority_index$area <- as.numeric(priority_index$area)
+total_area <- sum(priority_index$area)
+sum(priority_index$Priority_i*priority_index$area)/sum(priority_index$area)
+
+all_trees<- as.tibble(tree_priority) %>%
+  mutate(pa_ce = "all") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area,
+         crit = "trees")
+
+all_birds<- as.tibble(bird_priority) %>%
+  mutate(pa_ce = "all") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area,
+         crit = "birds")
+
+all_amphibians<- as.tibble(amp_priority) %>%
+  mutate(pa_ce = "all") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area,
+         crit = "amphibians")
+
+all_reptile<- as.tibble(reptile_priority) %>%
+  mutate(pa_ce = "all") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area,
+         crit = "reptiles")
+
+all_mammal<- as.tibble(mammal_priority) %>%
+  mutate(pa_ce = "all") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area,
+         crit = "mammals")
+
+all_fish<- as.tibble(fish_priority) %>%
+  mutate(pa_ce = "all") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area,
+         crit = "fish")
+
+all_fish
+```
+
+```{r}
+all_critters<- read_csv("../data/all_critters_output.csv")
+all_critters <- all_critters %>%
+  bind_rows(all_fish, all_trees, all_reptile, all_mammal, all_amphibians, all_birds)
+
+write_csv(all_critters, "../data/all_critters_output2.csv")
 ```
 
