@@ -1,0 +1,98 @@
+---
+title: "ecoregion-analysis"
+output: html_document
+---
+
+```{r}
+rm(list = ls())
+```
+
+```{r}
+ce_eco <- readRDS("../data/outputs/ce_eco.rds")
+pa_eco <- readRDS("../data/outputs/pa_eco.rds")
+```
+
+```{r}
+ce_eco$area <- st_area(ce_eco$geometry)
+sum(tree_ce$area)/sum(ce_eco$area)
+sum(mammal_ce$area)/sum(ce_eco$area)
+```
+
+```{r}
+pa_eco$area <- st_area(pa_eco$geometry)
+pa_eco<- pa_eco %>%
+  filter(IUCN_CAT == "Ia" | IUCN_CAT == "Ib" | IUCN_CAT == "II" | IUCN_CAT == "III" | IUCN_CAT == "IV")
+```
+
+```{r}
+sum(tree_pa$area)/sum(pa_eco$area)
+sum(mammal_pa$area)/sum(pa_eco$area)
+```
+
+
+## Trees
+```{r}
+tree_ce <- readRDS("../data/outputs/intersections/tree_ce.rds")
+tree_pa <- readRDS("../data/outputs/intersections/tree_pa.rds")
+```
+
+```{r}
+tree_pa %>% ggplot() + geom_sf()
+```
+
+```{r}
+pa_tree <- as.tibble(tree_pa) %>%
+  mutate(pa_ce = "pa") %>%
+  filter(IUCN_CAT == "Ia" | IUCN_CAT == "Ib" | IUCN_CAT == "II" | IUCN_CAT == "III" | IUCN_CAT == "IV") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_tree<- as.tibble(tree_ce) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+tree_priority <- pa_tree %>% bind_rows(ce_tree) %>%
+  mutate(crit = "trees") %>%
+  arrange(-priority_i)
+tree_priority 
+```
+
+
+## Mammals
+
+```{r}
+mammal_ce <- readRDS("../data/outputs/intersections/mammal_ce.rds")
+mammal_pa <- readRDS("../data/outputs/intersections/mammal_pa.rds")
+```
+
+
+```{r}
+pa_mammal <- as.tibble(mammal_pa) %>%
+  mutate(pa_ce = "pa") %>%
+  filter(IUCN_CAT == "Ia" | IUCN_CAT == "Ib" | IUCN_CAT == "II" | IUCN_CAT == "III" | IUCN_CAT == "IV") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_mammal<- as.tibble(mammal_ce) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+mammal_priority <- pa_mammal %>% bind_rows(ce_mammal) %>%
+  mutate(crit = "mammals") %>%
+  arrange(-priority_i)
+mammal_priority 
+```

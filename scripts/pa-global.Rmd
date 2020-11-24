@@ -2,7 +2,7 @@
 title: "pa-global"
 author: "Millie Chapman"
 date: "10/5/2020"
-output: html_document
+output: github_document
 ---
 
 ```{r}
@@ -12,8 +12,10 @@ library(wdpar)
 library(gridExtra)
 ```
 
+
 ```{r}
-#wdpa_US <- download.file("http://d1gam3xoknrgr2.cloudfront.net/current/WDPA_WDOECM_wdpa_shp.zip", "../data/wdpa.zip")
+usa_raw_pa_data <- wdpa_fetch("USA")
+usa_raw_pa_data <- usa_raw_pa_data
 ```
 
 ```{r}
@@ -23,40 +25,25 @@ library(gridExtra)
 #wdpa_usa <- wdpa %>%
 #  filter(ISO3 == "USA")
 
-#wdpa_usa <- wdpar::wdpa_clean(wdpa_usa)
+#wdpa_usa <- wdpar::wdpa_clean(usa_raw_pa_data)
 
-#st_write(wdpa_usa, "../data/wdpa/wdpa_clean_usa.shp")
+#st_write(wdpa_usa, "../data/wdpa_clean_usa.shp")
 ```
 
 ```{r}
-wdpa_usa <- st_read("../data/wdpa/wdpa_clean_usa.shp")
+#wdpa_usa <- st_read("../data/wdpa/wdpa_clean_usa.shp")
+wdpa_usa <- usa_raw_pa_data
 ```
 
-
-```{r}
-hotspots<- st_read("../data/hotspots/hotspots_revisited_2004_polygons.shp")
-```
-
-
-```{r}
-pa_hotspots <-st_intersection(wdpa, hotspots)
-```
-
-
-```{r}
-pa_hotspots$area <- st_area(pa_hotspots$geometry)
-wdpa$area <- st_area(wdpa$geometry)
-
-st_write(pa_hotspots, "../data/pa_hotspots.shp")
-```
-
-```{r}
-pa_hotspots <- st_read("../data/pa_hotspots.shp")
-```
 
 ```{r}
 priority_index <- st_read("../data/GeoTIFFs_and_shapefiles/Priority_index_summary.shp")
 ```
+
+```{r}
+priority_index <- st_transform(priority_index, st_crs(wdpa_usa))
+```
+
 
 ```{r}
 #wdpa_usa<- st_transform(wdpa_usa, crs = st_crs(priority_index))
@@ -64,12 +51,17 @@ pa_priority <- st_intersection(st_buffer(wdpa_usa,0), st_buffer(priority_index,0
 ```
 
 ```{r}
-ce <- st_read("../data/NCED_12182019_Shp/Conservation_Easements.shp")
+ce <- st_read("../data/NCED_08282020_shp/")
 ```
 
 ```{r}
 ce<- st_transform(ce, crs = st_crs(priority_index))
 ce_priority <- st_intersection(st_buffer(ce,0), st_buffer(priority_index,0))
+```
+
+```{r}
+wdpa_usa$area <- st_area(wdpa_usa$geometry)
+ce$area <- st_area(ce$geometry)
 ```
 
 ```{r}
@@ -81,7 +73,6 @@ pa_priority$area <- st_area(pa_priority$geometry)
 st_write(ce_priority, "../data/ce_priority.shp")
 st_write(pa_priority, "../data/pa_priority.shp")
 ```
-
 
 
 ```{r}
@@ -147,6 +138,7 @@ Birds
 bird_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Birds_priorities.shp")
 ce <- st_transform(ce, crs = st_crs(bird_priority))
 pa <- st_transform(wdpa_usa, crs = st_crs(bird_priority))
+
 bird_ce <- st_intersection(st_buffer(ce,0), st_buffer(bird_priority,0))
 bird_pa <- st_intersection(st_buffer(pa,0), st_buffer(bird_priority,0))
 ```
@@ -186,6 +178,9 @@ ce <- st_transform(ce, crs = st_crs(fish_priority))
 pa <- st_transform(wdpa_usa, crs = st_crs(fish_priority))
 fish_ce <- st_intersection(st_buffer(ce,0), st_buffer(fish_priority,0))
 fish_pa <- st_intersection(st_buffer(pa,0), st_buffer(fish_priority,0))
+plot(fish_priority$geometry)
+plot(mammal_priority$geometry)
+plot(ecoregions$geometry)
 ```
 
 ```{r}
@@ -251,6 +246,7 @@ ce_mammal<- as.tibble(mammal_ce) %>%
 mammal_priority_i <- pa_mammal %>% bind_rows(ce_mammal) %>%
    mutate(crit = "mammals")
 mammal_priority_i
+plot(mammal_priority$geometry)
 ```
 
 
@@ -306,7 +302,6 @@ tree_ce$area <- st_area(tree_ce$geometry)
 tree_pa$area <- st_area(tree_pa$geometry)
 ```
 
-
 ```{r}
 pa_tree <- as.tibble(tree_pa) %>%
   mutate(pa_ce = "pa") %>%
@@ -327,7 +322,6 @@ ce_tree<- as.tibble(tree_ce) %>%
 tree_priority_i <- pa_tree %>% bind_rows(ce_tree) %>%
     mutate(crit = "trees")
 tree_priority_i 
-
 ```
 
 

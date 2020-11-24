@@ -1,0 +1,205 @@
+---
+title: "ecoregions"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+library(stars)
+library(wdpar)
+library(gridExtra)
+library(sf)
+```
+
+```{r}
+usa_raw_pa_data <- wdpa_fetch("USA")
+#wdpa_usa <- st_read("../data/wdpa/wdpa_clean_usa.shp")
+wdpa_usa <- usa_raw_pa_data
+```
+
+```{r}
+usa <- st_read("../data/USshp/gadm36_USA_0.shp")
+```
+
+```{r}
+ecoregions <- st_read("../data/ecoregions/tnc_terr_ecoregions.shp")
+ecoregions<- st_transform(ecoregions, st_crs(wdpa_usa))
+```
+
+
+```{r}
+#wdpa_usa<- st_transform(wdpa_usa, crs = st_crs(priority_index))
+if (!file.exists("../data/outputs/pa_eco.rds")) {
+  pa <- st_intersection(st_buffer(wdpa_usa,0), st_buffer(ecoregions,0))
+  saveRDS(pa, "../data/outputs/pa_eco.rds")
+}
+pa <- readRDS("../data/outputs/pa_eco.rds")
+```
+
+```{r}
+ce <- st_read("../data/NCED_08282020_shp/")
+```
+
+```{r}
+ce <- st_transform(ce, st_crs(wdpa_usa))
+ce <- st_intersection(st_buffer(ce,0), st_buffer(ecoregions,0))
+saveRDS(ce, "../data/outputs/ce_eco.rds")
+```
+
+Birds
+```{r}
+bird_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Birds_priorities.shp")
+ce <- st_transform(ce, crs = st_crs(bird_priority))
+pa <- st_transform(pa, crs = st_crs(bird_priority))
+
+bird_ce <- st_intersection(st_buffer(ce,0), st_buffer(bird_priority,0))
+bird_pa <- st_intersection(st_buffer(pa,0), st_buffer(bird_priority,0))
+```
+
+```{r}
+bird_ce$area <- st_area(bird_ce$geometry)
+bird_pa$area <- st_area(bird_pa$geometry)
+saveRDS(bird_pa, "../data/outputs/intersections/bird_pa.rds")
+saveRDS(bird_ce, "../data/outputs/intersections/bird_ce.rds")
+```
+
+
+Fish
+```{r}
+fish_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Fish_priorities.shp")
+ce <- st_transform(ce, crs = st_crs(fish_priority))
+pa <- st_transform(pa, crs = st_crs(fish_priority))
+fish_ce <- st_intersection(st_buffer(ce,0), st_buffer(fish_priority,0))
+fish_pa <- st_intersection(st_buffer(pa,0), st_buffer(fish_priority,0))
+```
+
+
+```{r}
+fish_ce$area <- st_area(fish_ce$geometry)
+fish_pa$area <- st_area(fish_pa$geometry)
+saveRDS(fish_pa, "../data/outputs/intersections/fish_pa.rds")
+saveRDS(fish_ce, "../data/outputs/intersections/fish_ce.rds")
+```
+
+Mammals
+```{r}
+mammal_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Mammals_priorities.shp")
+ce <- st_transform(ce, crs = st_crs(mammal_priority))
+pa <- st_transform(pa, crs = st_crs(mammal_priority))
+mammal_ce <- st_intersection(st_buffer(ce,0), st_buffer(mammal_priority,0))
+mammal_pa <- st_intersection(st_buffer(pa,0), st_buffer(mammal_priority,0))
+```
+
+```{r}
+mammal_ce$area <- st_area(mammal_ce$geometry)
+mammal_pa$area <- st_area(mammal_pa$geometry)
+saveRDS(mammal_pa, "../data/outputs/intersections/mammal_pa.rds")
+saveRDS(mammal_ce, "../data/outputs/intersections/mammal_ce.rds")
+```
+
+Reptiles
+```{r}
+reptile_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Reptiles_priorities.shp")
+ce <- st_transform(ce, crs = st_crs(reptile_priority))
+pa <- st_transform(pa, crs = st_crs(reptile_priority))
+reptile_ce <- st_intersection(st_buffer(ce,0), st_buffer(reptile_priority,0))
+reptile_pa <- st_intersection(st_buffer(pa,0), st_buffer(reptile_priority,0))
+```
+
+```{r}
+reptile_ce$area <- st_area(reptile_ce$geometry)
+reptile_pa$area <- st_area(reptile_pa$geometry)
+saveRDS(reptile_pa, "../data/outputs/intersections/reptile_pa.rds")
+saveRDS(reptile_ce, "../data/outputs/intersections/reptile_ce.rds")
+```
+
+
+Amphibians
+```{r}
+amp_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Amphibians_priorities.shp")
+ce <- st_transform(ce, crs = st_crs(amp_priority))
+pa <- st_transform(pa, crs = st_crs(amp_priority))
+am_ce <- st_intersection(st_buffer(ce,0), st_buffer(amp_priority,0))
+am_pa <- st_intersection(st_buffer(pa,0), st_buffer(amp_priority,0))
+```
+
+```{r}
+am_ce$area <- st_area(am_ce$geometry)
+am_pa$area <- st_area(am_pa$geometry)
+saveRDS(am_pa, "../data/outputs/intersections/amp_pa.rds")
+saveRDS(am_ce, "../data/outputs/intersections/amp_ce.rds")
+```
+
+Trees
+
+```{r}
+tree_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Trees_priorities.shp")
+ce <- st_transform(ce, crs = st_crs(tree_priority))
+pa <- st_transform(pa, crs = st_crs(tree_priority))
+tree_ce <- st_intersection(st_buffer(ce,0), st_buffer(tree_priority,0))
+tree_pa <- st_intersection(st_buffer(pa,0), st_buffer(tree_priority,0))
+```
+
+```{r}
+tree_ce$area <- st_area(tree_ce$geometry)
+tree_pa$area <- st_area(tree_pa$geometry)
+saveRDS(tree_pa, "../data/outputs/intersections/tree_pa.rds")
+saveRDS(tree_ce, "../data/outputs/intersections/tree_ce.rds")
+```
+
+```{r}
+pa_tree <- as.tibble(tree_pa) %>%
+  mutate(pa_ce = "pa") %>%
+  group_by(pa_ce, ECO_NUM) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_tree<- as.tibble(tree_ce) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce, ECO_NUM) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+tree_priority_i <- pa_tree %>% bind_rows(ce_tree) %>%
+    mutate(crit = "trees")
+tree_priority_i 
+```
+
+```{r}
+pa_bird <- as.tibble(bird_pa) %>%
+  mutate(pa_ce = "pa") %>%
+  group_by(pa_ce, ECO_NUM) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_bird<- as.tibble(bird_ce) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce, ECO_NUM) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+bird_priority_i <- pa_bird %>% bind_rows(ce_bird) %>%
+   mutate(crit = "birds")
+bird_priority_i
+```
+
+```{r}
+bird_priority_i %>%
+  ggplot(aes(x = ECO_NUM, y = priority_i, fill =  pa_ce)) + geom_bar(stat = "identity", position = "dodge") 
+
+tree_priority_i %>%
+  ggplot(aes(x = ECO_NUM, y = priority_i, fill =  pa_ce)) + geom_bar(stat = "identity", position = "dodge") 
+```
+
+```{r}
+plot(pa$geometry)
+```
+
