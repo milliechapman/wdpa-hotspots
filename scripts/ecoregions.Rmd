@@ -203,3 +203,31 @@ tree_priority_i %>%
 plot(pa$geometry)
 ```
 
+
+```{r}
+tree_priority <- st_read("../data/GeoTIFFs_and_shapefiles/Trees_priorities.shp")
+```
+
+```{r}
+library(raster)
+trees<- raster("../data/GeoTIFFs_and_shapefiles/Trees_total_richness.tif")
+birds<- raster("../data/GeoTIFFs_and_shapefiles/Birds_total_richness.tif")
+mammals<- raster("../data/GeoTIFFs_and_shapefiles/Mammals_total_richness.tif")
+reptiles<- raster("../data/GeoTIFFs_and_shapefiles/Reptiles_total_richness.tif")
+```
+
+```{r}
+pa_eco <- readRDS("../data/outputs/pa_eco.rds")
+pa_eco<- pa_eco %>%
+  filter(IUCN_CAT == "Ia" | IUCN_CAT == "Ib" | IUCN_CAT == "II" | IUCN_CAT == "III" | IUCN_CAT == "IV")
+
+pa_eco <- pa_eco %>%
+  mutate(birds_richness = raster::extract(birds, pa_eco, fun = mean, na.rm = TRUE),
+         trees_richness = raster::extract(trees, pa_eco, fun = mean, na.rm = TRUE),
+         mammals_richness = raster::extract(mammals, pa_eco, fun = mean, na.rm = TRUE),
+         reptile_richness = raster::extract(reptiles, pa_eco, fun = mean, na.rm = TRUE))
+
+saveRDS(pa_eco, "../data/outputs/intersections/pa_eco.rds")
+```
+
+

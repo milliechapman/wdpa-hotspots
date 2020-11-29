@@ -12,6 +12,11 @@ ce_eco <- readRDS("../data/outputs/ce_eco.rds")
 pa_eco <- readRDS("../data/outputs/pa_eco.rds")
 ```
 
+
+
+
+
+
 ```{r}
 ce_eco$area <- st_area(ce_eco$geometry)
 sum(tree_ce$area)/sum(ce_eco$area)
@@ -44,7 +49,7 @@ tree_pa %>% ggplot() + geom_sf()
 pa_tree <- as.tibble(tree_pa) %>%
   mutate(pa_ce = "pa") %>%
   filter(IUCN_CAT == "Ia" | IUCN_CAT == "Ib" | IUCN_CAT == "II" | IUCN_CAT == "III" | IUCN_CAT == "IV") %>%
-  group_by(pa_ce) %>%
+  group_by(pa_ce, ECO_NUM) %>%
   summarise(priority_i = sum(Priority_i*as.numeric(area)),
             area = sum(as.numeric(area)),
             .groups = "drop") %>% 
@@ -96,3 +101,33 @@ mammal_priority <- pa_mammal %>% bind_rows(ce_mammal) %>%
   arrange(-priority_i)
 mammal_priority 
 ```
+
+## reptile
+
+```{r}
+reptile_ce <- readRDS("../data/outputs/intersections/reptile_ce.rds")
+reptile_pa <- readRDS("../data/outputs/intersections/reptile_pa.rds")
+```
+
+```{r}
+pa_reptile <- as.tibble(reptile_pa) %>%
+  mutate(pa_ce = "pa") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area) 
+
+ce_reptile<- as.tibble(reptile_ce) %>%
+  mutate(pa_ce = "ce") %>%
+  group_by(pa_ce) %>%
+  summarise(priority_i = sum(Priority_i*as.numeric(area)),
+            area = sum(as.numeric(area)),
+            .groups = "drop") %>% 
+  mutate(priority_i = priority_i/area)
+
+reptile_priority_i <- pa_reptile %>% bind_rows(ce_reptile) %>%
+   mutate(crit = "reptiles")
+reptile_priority_i
+```
+
